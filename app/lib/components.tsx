@@ -176,7 +176,7 @@ export function ItemCard({ item }: { item: ItemProperties }) {
       </CardContent>
 
       <CardActions
-        sx={{  }}
+        sx={{ flexWrap: "wrap" }}
       >
         {item.tags.map((tag, index) => (
           <Chip
@@ -300,7 +300,6 @@ export function CertificationCard({ certification }: { certification: Certificat
       </Typography>
         
       <Typography
-        gutterBottom
         variant="body2"
       >
         {certification.description}
