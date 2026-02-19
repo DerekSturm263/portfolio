@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
 import { AppBar, Toolbar } from "@mui/material";
-import { ItemProperties } from "./types";
+import { ItemProperties, Project, Experience, Certification } from "./types";
 
 export function Header() {
   return (

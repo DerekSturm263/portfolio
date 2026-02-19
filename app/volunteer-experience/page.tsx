@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const volunterExperiences = await getAll<Experience>('volunteer-experiences');
+  const volunteerExperiences = await getAll<Experience>('volunteer-experiences');
 
   return (
     <div>
