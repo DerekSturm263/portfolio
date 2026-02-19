@@ -1,5 +1,11 @@
+import { Metadata } from "next";
 import { Header, NavigationBar, List, Project } from "../lib/components";
 
+export const metadata: Metadata = {
+  title: "Projects | Derek Sturm",
+  description: "Projects created by Derek Sturm"
+};
+  
 const projects: Project[] = [
   {
     name: "MySkillStudy.com",

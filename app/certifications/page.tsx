@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { Header, NavigationBar, List, Certification } from "../lib/components";
+
+export const metadata: Metadata = {
+  title: "Certifications | Derek Sturm",
+  description: "Certifications earned by Derek Sturm"
+};
 
 const certifications: Certification[] = [
   {

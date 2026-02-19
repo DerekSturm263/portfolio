@@ -1,6 +1,12 @@
+import { Metadata } from "next";
 import { Header, NavigationBar, List, Experience } from "../lib/components";
 
-const professionalExperiences: Experience[] = [
+export const metadata: Metadata = {
+  title: "Work Experience | Derek Sturm",
+  description: "Work experience earned by Derek Sturm"
+};
+
+const workExperiences: Experience[] = [
   {
     company: "Mukilteo School District",
     position: "CTE Educator",
@@ -42,7 +48,7 @@ export default function Home() {
         <NavigationBar />
 
         <List
-          items={professionalExperiences}
+          items={workExperiences}
         />
       </main>
     </div>

@@ -4,8 +4,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
 
 export const metadata: Metadata = {
-  title: "Derek L. Herrera-Sturm - Portfolio",
-  description: "Check out the projects I've worked on",
+  title: "Derek Sturm",
+  description: "Software Engineer Portfolio"
 };
 
 export default function RootLayout({

@@ -1,6 +1,16 @@
 'use client'
 
-import { Avatar, Card, CardActions, CardContent, CardMedia, Chip, Grid, Link, MenuItem, Select, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Chip from "@mui/material/Chip";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
 export function Header() {
@@ -8,7 +18,7 @@ export function Header() {
     <Stack>
       <Link href="./">
         <Typography variant="h1">
-          Derek L. Herrera-Sturm
+          Derek Sturm
         </Typography>
       </Link>
 
@@ -49,9 +59,9 @@ export function NavigationBar() {
         </Typography>
       </Link>
       
-      <Link href="./professional-experience/">
+      <Link href="./work-experience/">
         <Typography variant="h6">
-          Professional Experience
+          Work Experience
         </Typography>
       </Link>
       
@@ -66,37 +76,37 @@ export function NavigationBar() {
           Certifications
         </Typography>
       </Link>
+      
+      <Link href="./contact/">
+        <Typography variant="h6">
+          Contact
+        </Typography>
+      </Link>
     </Stack>
   );
 }
 
 export function List({ items }: { items: ItemProperties[] }) {
+  const tags = items.reduce((acc, item) => {
+    item.tags.forEach((tag) => {
+      if (!acc.includes(tag))
+        acc.push(tag);
+    });
+    return acc;
+  }, [] as string[]);
+
   return (
     <Stack>
       <Select
-        value={[ "website", "discord", "nodejs", "devops", "react" ]}
+        value={tags}
         label="Filter by category"
         multiple
       >
-        <MenuItem value="website">
-          Website
-        </MenuItem>
-            
-        <MenuItem value="discord">
-          Discord
-        </MenuItem>
-            
-        <MenuItem value="nodejs">
-          Node.JS
-        </MenuItem>
-            
-        <MenuItem value="devops">
-          DevOps
-        </MenuItem>
-            
-        <MenuItem value="react">
-          React
-        </MenuItem>
+        {tags.map((tag, index) => (
+          <MenuItem value={tag} key={index}>
+            {tag}
+          </MenuItem>
+        ))}
       </Select>
 
       <Grid

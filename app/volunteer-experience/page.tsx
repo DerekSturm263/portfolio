@@ -1,4 +1,10 @@
+import { Metadata } from "next";
 import { Header, NavigationBar, List, Experience } from "../lib/components";
+
+export const metadata: Metadata = {
+  title: "Volunteer Experience | Derek Sturm",
+  description: "Volunteer experience earned by Derek Sturm"
+};
 
 const volunteerExperiences: Experience[] = [
   {
