@@ -1,6 +1,6 @@
 'use server'
 
-import { MongoClient, ObjectId, UpdateResult, WithId } from 'mongodb';
+import { MongoClient, WithId } from 'mongodb';
 import { ItemProperties } from './types';
 
 const client = new MongoClient(process.env.MONGODB_URI ?? '', {

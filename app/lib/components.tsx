@@ -6,7 +6,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
-import Grid from "@mui/material/Grid";
+import Masonry from "@mui/lab/Masonry";
 import Link from "@mui/material/Link";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -30,8 +30,15 @@ export function Header() {
             direction="row"
             sx={{ justifyContent: "space-between", alignItems: "stretch" }}
           >
-            <Link href="./">
-              <Typography gutterBottom variant="h2">
+            {/* Header */}
+            <Link
+              href="./"
+              sx={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Typography
+                gutterBottom
+                variant="h2"
+              >
                 <TypeAnimation
                   sequence={[
                     "Derek Sturm, Software Engineer",
@@ -47,34 +54,35 @@ export function Header() {
               </Typography>
             </Link>
 
+            {/* Social Links */}
             <Stack
               direction="row"
               spacing={3}
+              sx={{ alignItems: "center" }}
             >
-              <Link
-                href="https://www.linkedin.com/in/derek-sturm/"
-              >
-                <Avatar src="/icons/linked-in.png" variant="square" />
-              </Link>
-                  
-              <Link
-                href="https://github.com/DerekSturm263/"
-              >
-                <Avatar src="/icons/github.svg" variant="square" />
-              </Link>
-                  
-              <Link
-                href="https://dereksturm263.itch.io/"
-              >
-                <Avatar src="/icons/itch-io.svg" variant="square" />
-              </Link>
+              {[
+                [ "https://www.linkedin.com/in/derek-sturm/", "/icons/linked-in.png" ],
+                [ "https://github.com/DerekSturm263/", "/icons/github.svg" ],
+                [ "https://dereksturm263.itch.io/", "/icons/itch-io.svg" ]
+              ].map((item, index) => (
+                <Link
+                  href={item[0]}
+                  key={index}
+                >
+                  <Avatar
+                    src={item[1]}
+                    variant="square"
+                  />
+                </Link>
+              ))}
             </Stack>
           </Stack>
 
+          {/* Navigation Bar */}
           <Stack
             direction="row"
             spacing={3}
-            sx={{ justifyContent: "center" }}
+            sx={{ justifyContent: "center", backgroundColor: "rgba(0, 0, 0, 0.25)" }}
           >
             {[
               [ "Projects", "projects" ],
@@ -86,6 +94,7 @@ export function Header() {
               <Link
                 href={item[1]}
                 key={index}
+                sx={{ textDecoration: "none", color: "inherit" }}
               >
                 <Typography
                   variant="h6"
@@ -118,14 +127,17 @@ export function List({ items }: { items: ItemProperties[] }) {
         multiple
       >
         {tags.map((tag, index) => (
-          <MenuItem value={tag} key={index}>
+          <MenuItem
+            value={tag}
+            key={index}
+          >
             {tag}
           </MenuItem>
         ))}
       </Select>
 
-      <Grid
-        container
+      <Masonry
+        columns={4}
         spacing={5}
         sx={{ justifyContent: "center" }}
       >
@@ -137,58 +149,36 @@ export function List({ items }: { items: ItemProperties[] }) {
             key={index}
           />
         ))}
-      </Grid>
+      </Masonry>
     </Stack>
   );
 }
 
 export function ItemCard({ item }: { item: ItemProperties }) {
-  if ((item as Project).teamSize !== undefined)
-    return <ProjectCard project={item as Project} />;
-  else if ((item as Experience).company !== undefined)
-    return <ExperienceCard experience={item as Experience} />;
-  else if ((item as Certification).title !== undefined)
-    return <CertificationCard certification={item as Certification} />;
-}
-
-export function ProjectCard({ project }: { project: Project }) {
   return (
     <Card
       sx={{ width: 350 }}
     >
       <CardMedia
         component="video"
-        src={project.media}
+        src={item.media}
+        image={item.media}
       />
 
       <CardContent>
-        <Link href={project.link}>
-          <Typography gutterBottom variant="h5">
-            {project.name}
-          </Typography>
-        </Link>
-
-        <Typography gutterBottom variant="body1">
-          {project.description}
-        </Typography>
-
-        <Typography variant="body2">
-          Timeline: <b>{project.startDate} - {project.endDate}</b>
-        </Typography>
-        
-        <Typography variant="body2">
-          Team Size: <b>{project.teamSize}</b>
-        </Typography>
-        
-        <Typography variant="body2">
-          Roles: <b>{project.roles.join(", ")}</b>
-        </Typography>
+        {(item as Project).teamSize !== undefined ? (
+          <ProjectCard project={item as Project} />
+        ) : (item as Experience).company !== undefined ? (
+          <ExperienceCard experience={item as Experience} />
+        ) : (item as Certification).title !== undefined ? (
+          <CertificationCard certification={item as Certification} />
+        ) : null}
       </CardContent>
 
       <CardActions
         sx={{  }}
       >
-        {project.tags.map((tag, index) => (
+        {item.tags.map((tag, index) => (
           <Chip
             label={tag}
             key={index}
@@ -196,89 +186,125 @@ export function ProjectCard({ project }: { project: Project }) {
         ))}
       </CardActions>
     </Card>
+  );
+}
+
+export function ProjectCard({ project }: { project: Project }) {
+  return (
+    <>
+      <Link
+        href={project.link}
+        sx={{ textDecoration: "none", color: "inherit" }}
+      >
+        <Typography
+          gutterBottom
+          variant="h5"
+        >
+          {project.name}
+        </Typography>
+      </Link>
+
+      <Typography
+        gutterBottom
+        variant="body1"
+      >
+        {project.description}
+      </Typography>
+
+      <Typography
+        variant="body2"
+      >
+        Timeline: <b>{project.startDate} - {project.endDate}</b>
+      </Typography>
+        
+      <Typography
+        variant="body2"
+      >
+        Team Size: <b>{project.teamSize}</b>
+      </Typography>
+        
+      <Typography
+        variant="body2"
+      >
+        Roles: <b>{project.roles.join(", ")}</b>
+      </Typography>
+    </>
   );
 }
 
 export function ExperienceCard({ experience }: { experience: Experience }) {
   return (
-    <Card
-      sx={{ width: 350 }}
-    >
-      <CardMedia
-        sx={{ height: 140 }}
-        image={experience.media}
-      />
-
-      <CardContent>
-        <Link href={experience.link}>
-          <Typography gutterBottom variant="h5">
-            {experience.position}
-          </Typography>
-        </Link>
+    <>
+      <Link
+        href={experience.link}
+        sx={{ textDecoration: "none", color: "inherit" }}
+      >
+        <Typography
+          gutterBottom
+          variant="h5"
+        >
+          {experience.position}
+        </Typography>
+      </Link>
         
-        <Typography gutterBottom variant="h6">
-          {experience.company}
-        </Typography>
+      <Typography
+        gutterBottom
+        variant="h6"
+      >
+        {experience.company}
+      </Typography>
 
-        <Typography gutterBottom variant="body2">
-          Timeline: <b>{experience.startDate} - {experience.endDate}</b>
-        </Typography>
+      <Typography
+        gutterBottom
+        variant="body2"
+      >
+        Timeline: <b>{experience.startDate} - {experience.endDate}</b>
+      </Typography>
         
-        <Typography variant="body2">
-          {experience.description}
-        </Typography>
-      </CardContent>
-
-      <CardActions>
-        {experience.tags.map((tag, index) => (
-          <Chip
-            label={tag}
-            key={index}
-          />
-        ))}
-      </CardActions>
-    </Card>
+      <Typography
+        variant="body2"
+      >
+        {experience.description}
+      </Typography>
+    </>
   );
 }
 
 export function CertificationCard({ certification }: { certification: Certification }) {
   return (
-    <Card
-      sx={{ width: 350 }}
-    >
-      <CardMedia
-        sx={{ height: 250 }}
-        image={certification.media}
-      />
-
-      <CardContent>
-        <Link href={certification.link}>
-          <Typography gutterBottom variant="h5">
-            {certification.title}
-          </Typography>
-        </Link>
+    <>
+      <Link
+        href={certification.link}
+        sx={{ textDecoration: "none", color: "inherit" }}
+      >
+        <Typography
+          gutterBottom
+          variant="h5"
+        >
+          {certification.title}
+        </Typography>
+      </Link>
         
-        <Typography gutterBottom variant="h6">
-          {certification.provider}
-        </Typography>
+      <Typography
+        gutterBottom
+        variant="h6"
+      >
+        {certification.provider}
+      </Typography>
 
-        <Typography gutterBottom variant="body2">
-          Awarded: <b>{certification.startDate}</b>
-        </Typography>
+      <Typography
+        gutterBottom
+        variant="body2"
+      >
+        Awarded: <b>{certification.startDate}</b>
+      </Typography>
         
-        <Typography gutterBottom variant="body2">
-          {certification.description}
-        </Typography>
-      </CardContent>
-
-      <CardActions>
-        {certification.tags.map((tag, index) => (
-          <Chip
-            label={tag}
-            key={index}
-          />
-        ))}
-      </CardActions>
-    </Card>
+      <Typography
+        gutterBottom
+        variant="body2"
+      >
+        {certification.description}
+      </Typography>
+    </>
   );
 }
