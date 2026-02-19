@@ -12,77 +12,91 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import { TypeAnimation } from "react-type-animation";
+import { AppBar, Toolbar } from "@mui/material";
 
 export function Header() {
   return (
-    <Stack>
-      <Link href="./">
-        <Typography variant="h1">
-          Derek Sturm
-        </Typography>
-      </Link>
-
-      <Typography gutterBottom variant="h2">
-        Software Engineer
-      </Typography>
-
-      <Stack
-        direction="row"
-        spacing={2}
-      >
-        <Link
-          href="https://www.linkedin.com/in/derek-sturm/"
-        >
-          <Avatar src="/icons/linked-in.png" />
-        </Link>
-            
-        <Link
-          href="https://github.com/DerekSturm263"
-        >
-          <Avatar src="/icons/github.svg" />
-        </Link>
-      </Stack>
-    </Stack>
-  );
-}
-
-export function NavigationBar() {
-  return (
-    <Stack
-      direction="row"
-      spacing={2}
-      sx={{ justifyContent: "center" }}
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
-      <Link href="./projects/">
-        <Typography variant="h6">
-          Projects
-        </Typography>
-      </Link>
-      
-      <Link href="./work-experience/">
-        <Typography variant="h6">
-          Work Experience
-        </Typography>
-      </Link>
-      
-      <Link href="./volunteer-experience/">
-        <Typography variant="h6">
-          Volunteer Experience
-        </Typography>
-      </Link>
-      
-      <Link href="./certifications/">
-        <Typography variant="h6">
-          Certifications
-        </Typography>
-      </Link>
-      
-      <Link href="./contact/">
-        <Typography variant="h6">
-          Contact
-        </Typography>
-      </Link>
-    </Stack>
+      <Toolbar>
+        <Stack
+          sx={{ width: "100%" }}
+        >
+          <Stack
+            direction="row"
+            sx={{ justifyContent: "space-between", alignItems: "stretch" }}
+          >
+            <Link href="./">
+              <Typography gutterBottom variant="h2">
+                <TypeAnimation
+                  sequence={[
+                    "Derek Sturm, Software Engineer",
+                    1000,
+                    "Derek Sturm, Web Developer",
+                    1000,
+                    "Derek Sturm, Game Developer",
+                    1000
+                  ]}
+                  speed={25}
+                  repeat={Infinity}
+                />
+              </Typography>
+            </Link>
+
+            <Stack
+              direction="row"
+              spacing={3}
+            >
+              <Link
+                href="https://www.linkedin.com/in/derek-sturm/"
+              >
+                <Avatar src="/icons/linked-in.png" variant="square" />
+              </Link>
+                  
+              <Link
+                href="https://github.com/DerekSturm263/"
+              >
+                <Avatar src="/icons/github.svg" variant="square" />
+              </Link>
+                  
+              <Link
+                href="https://dereksturm263.itch.io/"
+              >
+                <Avatar src="/icons/itch-io.svg" variant="square" />
+              </Link>
+            </Stack>
+          </Stack>
+
+          <Stack
+            direction="row"
+            spacing={3}
+            sx={{ justifyContent: "center" }}
+          >
+            {[
+              [ "Projects", "projects" ],
+              [ "Work Experience", "work-experience" ],
+              [ "Volunteer Experience", "volunteer-experience" ],
+              [ "Certifications", "certifications" ],
+              [ "Contact", "contact" ]
+            ].map((item, index) => (
+              <Link
+                href={item[1]}
+                key={index}
+              >
+                <Typography
+                  variant="h6"
+                >
+                  {item[0]}
+                </Typography>
+              </Link>
+            ))}
+          </Stack>
+        </Stack>
+      </Toolbar>
+    </AppBar>
   );
 }
 
@@ -195,7 +209,9 @@ export function ProjectCard({ project }: { project: Project }) {
         </Typography>
       </CardContent>
 
-      <CardActions>
+      <CardActions
+        sx={{  }}
+      >
         {project.tags.map((tag, index) => (
           <Chip
             label={tag}

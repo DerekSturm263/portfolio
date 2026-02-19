@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Header, NavigationBar, List, Certification } from "../lib/components";
+import { Header, List, Certification } from "../lib/components";
+import { Toolbar } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Certifications | Derek Sturm",
@@ -44,8 +45,7 @@ export default function Home() {
     <div>
       <main>
         <Header />
-
-        <NavigationBar />
+        <Toolbar />
 
         <List
           items={certifications}

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { Header, NavigationBar, List, Experience } from "../lib/components";
+import { Header, List, Experience } from "../lib/components";
+import { Toolbar } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Volunteer Experience | Derek Sturm",
@@ -34,8 +35,7 @@ export default function Home() {
     <div>
       <main>
         <Header />
-
-        <NavigationBar />
+        <Toolbar />
 
         <List
           items={volunteerExperiences}

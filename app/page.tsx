@@ -1,13 +1,12 @@
-import { Typography } from "@mui/material";
-import { Header, NavigationBar } from "./lib/components";
+import { Toolbar, Typography } from "@mui/material";
+import { Header } from "./lib/components";
 
 export default function Home() {
   return (
     <div>
       <main>
         <Header />
-        
-        <NavigationBar />
+        <Toolbar />
 
         <Typography variant="body1">
           

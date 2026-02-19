@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Header, NavigationBar } from "../lib/components";
+import { Header } from "../lib/components";
+import { Toolbar } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Contact | Derek Sturm",
@@ -11,8 +12,7 @@ export default function Home() {
     <div>
       <main>
         <Header />
-
-        <NavigationBar />
+        <Toolbar />
       </main>
     </div>
   );
