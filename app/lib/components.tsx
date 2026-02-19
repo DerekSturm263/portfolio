@@ -139,7 +139,7 @@ export function List({ items }: { items: ItemProperties[] }) {
       <Masonry
         columns={4}
         spacing={5}
-        sx={{ justifyContent: "center" }}
+        sx={{  }}
       >
         {items.sort((a, b) => {
           return parseInt(b.startDate) - parseInt(a.startDate);
@@ -176,7 +176,7 @@ export function ItemCard({ item }: { item: ItemProperties }) {
       </CardContent>
 
       <CardActions
-        sx={{ flexWrap: "wrap" }}
+        sx={{ flexWrap: "wrap", rowGap: 8 }}
       >
         {item.tags.map((tag, index) => (
           <Chip
@@ -240,7 +240,6 @@ export function ExperienceCard({ experience }: { experience: Experience }) {
         sx={{ textDecoration: "none", color: "inherit" }}
       >
         <Typography
-          gutterBottom
           variant="h5"
         >
           {experience.position}
