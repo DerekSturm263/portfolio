@@ -176,7 +176,7 @@ export function ItemCard({ item }: { item: ItemProperties }) {
       </CardContent>
 
       <CardActions
-        sx={{ flexWrap: "wrap", rowGap: 8 }}
+        sx={{ flexWrap: "wrap", rowGap: "8px" }}
       >
         {item.tags.map((tag, index) => (
           <Chip
