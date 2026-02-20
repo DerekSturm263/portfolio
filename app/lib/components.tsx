@@ -13,7 +13,7 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, CardActionArea, Toolbar } from "@mui/material";
 import { ItemProperties, Project, Experience, Certification } from "./types";
 
 export function Header() {
@@ -159,32 +159,34 @@ export function ItemCard({ item }: { item: ItemProperties }) {
     <Card
       sx={{ width: 300 }}
     >
-      <CardMedia
-        component="video"
-        src={item.media}
-        image={item.media}
-      />
+      <CardActionArea>
+        <CardMedia
+          component="video"
+          src={item.media}
+          image={item.media}
+        />
 
-      <CardContent>
-        {(item as Project).teamSize !== undefined ? (
-          <ProjectCard project={item as Project} />
-        ) : (item as Experience).company !== undefined ? (
-          <ExperienceCard experience={item as Experience} />
-        ) : (item as Certification).title !== undefined ? (
-          <CertificationCard certification={item as Certification} />
-        ) : null}
-      </CardContent>
+        <CardContent>
+          {(item as Project).teamSize !== undefined ? (
+            <ProjectCard project={item as Project} />
+          ) : (item as Experience).company !== undefined ? (
+            <ExperienceCard experience={item as Experience} />
+          ) : (item as Certification).title !== undefined ? (
+            <CertificationCard certification={item as Certification} />
+          ) : null}
+        </CardContent>
 
-      <CardActions
-        sx={{ flexWrap: "wrap", rowGap: "8px" }}
-      >
-        {item.tags.map((tag, index) => (
-          <Chip
-            label={tag}
-            key={index}
-          />
-        ))}
-      </CardActions>
+        <CardActions
+          sx={{ flexWrap: "wrap", rowGap: "8px" }}
+        >
+          {item.tags.map((tag, index) => (
+            <Chip
+              label={tag}
+              key={index}
+            />
+          ))}
+        </CardActions>
+      </CardActionArea>
     </Card>
   );
 }
