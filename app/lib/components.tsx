@@ -197,12 +197,18 @@ export function ProjectCard({ project }: { project: Project }) {
         sx={{ textDecoration: "none", color: "inherit" }}
       >
         <Typography
-          gutterBottom
           variant="h5"
         >
           {project.name}
         </Typography>
       </Link>
+        
+      <Typography
+        gutterBottom
+        variant="h6"
+      >
+        {project.company}
+      </Typography>
 
       <Typography
         gutterBottom
@@ -277,7 +283,6 @@ export function CertificationCard({ certification }: { certification: Certificat
         sx={{ textDecoration: "none", color: "inherit" }}
       >
         <Typography
-          gutterBottom
           variant="h5"
         >
           {certification.title}

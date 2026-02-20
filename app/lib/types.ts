@@ -9,6 +9,7 @@ export interface ItemProperties {
 
 export interface Project extends ItemProperties {
   name: string;
+  company: string;
   teamSize: number;
   roles: string[];
 }
