@@ -15,6 +15,7 @@ import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
 import { AppBar, CardActionArea, TextField, Toolbar } from "@mui/material";
 import { ItemProperties, Project, Experience, Certification } from "./types";
+import { useState } from "react";
 
 export function Header() {
   return (
@@ -119,6 +120,9 @@ export function List({ items }: { items: ItemProperties[] }) {
     return acc;
   }, [] as string[]);
 
+  const [ searchTerm, setSearchTerm ] = useState("");
+  const [ selectedTags, setSelectedTags ] = useState<string[]>([]);
+
   return (
     <Stack>
       <Toolbar />
@@ -130,12 +134,22 @@ export function List({ items }: { items: ItemProperties[] }) {
           label="Search"
           variant="outlined"
           fullWidth
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
 
         <Select
-          value={tags}
           label="Filter"
+          value={tags}
           multiple
+          onChange={(e) => {
+            const {
+              target: { value },
+            } = e;
+
+            setSelectedTags(
+              typeof value === 'string' ? value.split(',') : value,
+            );
+          }}
         >
           {tags.map((tag, index) => (
             <MenuItem
