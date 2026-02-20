@@ -13,9 +13,10 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
-import { AppBar, CardActionArea, TextField, Toolbar } from "@mui/material";
-import { ItemProperties, Project, Experience, Certification } from "./types";
+import { AppBar, CardActionArea, InputAdornment, TextField, Toolbar } from "@mui/material";
+import { ItemProperties } from "./types";
 import { useState } from "react";
+import { Search } from "@mui/icons-material";
 
 export function Header() {
   return (
@@ -112,64 +113,34 @@ export function Header() {
 }
 
 export function List({ items }: { items: ItemProperties[] }) {
-  const tags = items.reduce((acc, item) => {
-    item.tags.forEach((tag) => {
-      if (!acc.includes(tag))
-        acc.push(tag);
-    });
-    return acc;
-  }, [] as string[]);
-
   const [ searchTerm, setSearchTerm ] = useState("");
-  const [ selectedTags, setSelectedTags ] = useState<string[]>([]);
 
   return (
     <Stack>
       <Toolbar />
 
-      <Stack
-        direction="row"
-      >
-        <TextField
-          label="Search"
-          variant="outlined"
-          fullWidth
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-
-        <Select
-          label="Filter"
-          value={tags}
-          multiple
-          onChange={(e) => {
-            const {
-              target: { value },
-            } = e;
-
-            setSelectedTags(
-              typeof value === 'string' ? value.split(',') : value,
-            );
-          }}
-        >
-          {tags.map((tag, index) => (
-            <MenuItem
-              value={tag}
-              key={index}
-            >
-              {tag}
-            </MenuItem>
-          ))}
-        </Select>
-      </Stack>
+      <TextField
+        label="Search"
+        variant="outlined"
+        fullWidth
+        onChange={(e) => setSearchTerm(e.target.value)}
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="end">
+                <Search />
+              </InputAdornment>
+            ),
+          },
+        }}
+      />
 
       <Masonry
         columns={3}
         spacing={5}
         sx={{ width: "80%", margin: "auto" }}
       >
-        {items.sort((a, b) => {
-          return parseInt(b.startDate) - parseInt(a.startDate);
-        }).map((project, index) => (
+        {items.filter(item => item.title.toLowerCase().includes(searchTerm.toLowerCase())).map((project, index) => (
           <ItemCard
             item={project}
             key={index}
@@ -187,155 +158,59 @@ export function ItemCard({ item }: { item: ItemProperties }) {
     >
       <CardActionArea>
         <CardMedia
-          component="video"
+          component={item.mediaType}
           src={item.media}
           image={item.media}
         />
 
         <CardContent>
-          {(item as Project).teamSize !== undefined ? (
-            <ProjectCard project={item as Project} />
-          ) : (item as Experience).company !== undefined ? (
-            <ExperienceCard experience={item as Experience} />
-          ) : (item as Certification).title !== undefined ? (
-            <CertificationCard certification={item as Certification} />
-          ) : null}
+          <Link
+            href={item.link}
+            sx={{ textDecoration: "none", color: "inherit" }}
+            gutterBottom
+          >
+            <Typography
+              variant="h5"
+            >
+              {item.title}
+            </Typography>
+
+            <Typography
+              variant="h6"
+            >
+              {item.subTitle}
+            </Typography>
+          </Link>
+
+          <Typography
+            variant="body1"
+          >
+            {item.description}
+          </Typography>
+
+          <Typography
+            gutterBottom
+            variant="body2"
+          >
+            {item.subDescription}
+          </Typography>
         </CardContent>
 
         <CardActions
           sx={{ flexWrap: "wrap", rowGap: "8px" }}
         >
-          {item.tags.map((tag, index) => (
-            <Chip
-              label={tag}
-              key={index}
-            />
+          {item.tags.map((tag1, i1) => (
+            <Typography>
+              {tag1.tags.map((tag2, i2) => (
+                <Chip
+                  label={tag2}
+                  key={tag2}
+                />
+              ))}
+            </Typography>
           ))}
         </CardActions>
       </CardActionArea>
     </Card>
-  );
-}
-
-export function ProjectCard({ project }: { project: Project }) {
-  return (
-    <>
-      <Link
-        href={project.link}
-        sx={{ textDecoration: "none", color: "inherit" }}
-      >
-        <Typography
-          variant="h5"
-        >
-          {project.name}
-        </Typography>
-      </Link>
-        
-      <Typography
-        gutterBottom
-        variant="h6"
-      >
-        {project.company}
-      </Typography>
-
-      <Typography
-        gutterBottom
-        variant="body1"
-      >
-        {project.description}
-      </Typography>
-
-      <Typography
-        variant="body2"
-      >
-        Timeline: <b>{project.startDate} - {project.endDate}</b>
-      </Typography>
-        
-      <Typography
-        variant="body2"
-      >
-        Team Size: <b>{project.teamSize}</b>
-      </Typography>
-        
-      <Typography
-        variant="body2"
-      >
-        Roles: <b>{project.roles.join(", ")}</b>
-      </Typography>
-    </>
-  );
-}
-
-export function ExperienceCard({ experience }: { experience: Experience }) {
-  return (
-    <>
-      <Link
-        href={experience.link}
-        sx={{ textDecoration: "none", color: "inherit" }}
-      >
-        <Typography
-          variant="h5"
-        >
-          {experience.position}
-        </Typography>
-      </Link>
-        
-      <Typography
-        gutterBottom
-        variant="h6"
-      >
-        {experience.company}
-      </Typography>
-
-      <Typography
-        gutterBottom
-        variant="body2"
-      >
-        Timeline: <b>{experience.startDate} - {experience.endDate}</b>
-      </Typography>
-        
-      <Typography
-        variant="body2"
-      >
-        {experience.description}
-      </Typography>
-    </>
-  );
-}
-
-export function CertificationCard({ certification }: { certification: Certification }) {
-  return (
-    <>
-      <Link
-        href={certification.link}
-        sx={{ textDecoration: "none", color: "inherit" }}
-      >
-        <Typography
-          variant="h5"
-        >
-          {certification.title}
-        </Typography>
-      </Link>
-        
-      <Typography
-        gutterBottom
-        variant="h6"
-      >
-        {certification.provider}
-      </Typography>
-
-      <Typography
-        gutterBottom
-        variant="body2"
-      >
-        Awarded: <b>{certification.startDate}</b>
-      </Typography>
-        
-      <Typography
-        variant="body2"
-      >
-        {certification.description}
-      </Typography>
-    </>
   );
 }

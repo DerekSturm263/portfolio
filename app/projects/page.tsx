@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { Header, List } from "../lib/components";
-import { Project } from "../lib/types";
+import { ItemProperties } from "../lib/types";
 import { Toolbar } from "@mui/material";
 import { getAll } from "../lib/database";
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const projects = await getAll<Project>('projects');
+  const projects = await getAll<ItemProperties>('projects');
 
   return (
     <div>

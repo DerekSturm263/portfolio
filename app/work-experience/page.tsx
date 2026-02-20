@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { Header, List } from "../lib/components";
-import { Experience } from "../lib/types";
+import { ItemProperties } from "../lib/types";
 import { Toolbar } from "@mui/material";
 import { getAll } from "../lib/database";
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const workExperiences = await getAll<Experience>('work-experiences');
+  const workExperiences = await getAll<ItemProperties>('work-experiences');
 
   return (
     <div>
