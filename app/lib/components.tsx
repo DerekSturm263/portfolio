@@ -13,7 +13,7 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
-import { AppBar, CardActionArea, Toolbar } from "@mui/material";
+import { AppBar, CardActionArea, TextField, Toolbar } from "@mui/material";
 import { ItemProperties, Project, Experience, Certification } from "./types";
 
 export function Header() {
@@ -121,20 +121,32 @@ export function List({ items }: { items: ItemProperties[] }) {
 
   return (
     <Stack>
-      <Select
-        value={tags}
-        label="Filter by category"
-        multiple
+      <Toolbar />
+
+      <Stack
+        direction="row"
       >
-        {tags.map((tag, index) => (
-          <MenuItem
-            value={tag}
-            key={index}
-          >
-            {tag}
-          </MenuItem>
-        ))}
-      </Select>
+        <TextField
+          label="Search"
+          variant="outlined"
+          fullWidth
+        />
+
+        <Select
+          value={tags}
+          label="Filter"
+          multiple
+        >
+          {tags.map((tag, index) => (
+            <MenuItem
+              value={tag}
+              key={index}
+            >
+              {tag}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
 
       <Masonry
         columns={3}
