@@ -137,7 +137,7 @@ export function List({ items }: { items: ItemProperties[] }) {
       </Select>
 
       <Masonry
-        columns={3}
+        columns={2}
         spacing={5}
         sx={{  }}
       >
@@ -157,7 +157,7 @@ export function List({ items }: { items: ItemProperties[] }) {
 export function ItemCard({ item }: { item: ItemProperties }) {
   return (
     <Card
-      sx={{ width: 350 }}
+      sx={{ width: 300 }}
     >
       <CardMedia
         component="video"
