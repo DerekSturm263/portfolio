@@ -137,7 +137,7 @@ export function List({ items }: { items: ItemProperties[] }) {
       </Select>
 
       <Masonry
-        columns={4}
+        columns={3}
         spacing={5}
         sx={{  }}
       >
