@@ -139,7 +139,7 @@ export function List({ items }: { items: ItemProperties[] }) {
       <Masonry
         columns={3}
         spacing={5}
-        sx={{ width: "80%" }}
+        sx={{ width: "80%", margin: "auto" }}
       >
         {items.sort((a, b) => {
           return parseInt(b.startDate) - parseInt(a.startDate);
