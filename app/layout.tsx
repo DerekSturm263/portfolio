@@ -15,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ThemeProvider theme={theme}>
+      <ThemeProvider
+        theme={theme}
+      >
         <CssBaseline />
           
         <body>

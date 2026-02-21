@@ -5,10 +5,12 @@ import { List } from "./lib/list";
 export default function Home() {
   return (
     <div>
-      <main>
+      <main
+        style={{ scrollBehavior: "smooth" }}
+      >
         <Header />
         <Sidebar />
-        
+
         <Toolbar />
         <Toolbar />
 
