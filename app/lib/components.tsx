@@ -114,23 +114,23 @@ export function ItemCard({ item }: { item: ItemProperties }) {
           src={item.media}
           image={item.media}
         />
-        
-        <CardHeader>
-          <Typography
-            variant="h5"
-          >
-            {item.title}
-          </Typography>
-
-          <Typography
-            variant="h6"
-            gutterBottom
-          >
-            {item.subTitle}
-          </Typography>
-        </CardHeader>
 
         <CardContent>
+          <CardHeader>
+            <Typography
+              variant="h5"
+            >
+              {item.title}
+            </Typography>
+
+            <Typography
+              variant="h6"
+              gutterBottom
+            >
+              {item.subTitle}
+            </Typography>
+          </CardHeader>
+
           <Typography
             variant="body1"
           >
