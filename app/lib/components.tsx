@@ -229,7 +229,7 @@ export async function ContactSendEmail() {
           onChange={(e) => setSubject(e.target.value)}
           slotProps={{
             input: {
-              endAdornment: (
+              startAdornment: (
                 <InputAdornment position="end">
                   <Info />
                 </InputAdornment>
@@ -245,7 +245,7 @@ export async function ContactSendEmail() {
           onChange={(e) => setSenderEmail(e.target.value)}
           slotProps={{
             input: {
-              endAdornment: (
+              startAdornment: (
                 <InputAdornment position="end">
                   <AccountCircle />
                 </InputAdornment>
@@ -263,7 +263,7 @@ export async function ContactSendEmail() {
           onChange={(e) => setMessage(e.target.value)}
           slotProps={{
             input: {
-              endAdornment: (
+              startAdornment: (
                 <InputAdornment position="end">
                   <Notes />
                 </InputAdornment>
