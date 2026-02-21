@@ -186,7 +186,7 @@ export async function ContactSendEmail() {
         variant="h3"
         id="contact"
       >
-        "Contact Me"
+        Contact Me
       </Typography>
 
       <Card>
