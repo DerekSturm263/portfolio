@@ -14,7 +14,6 @@ import { AppBar, Box, Button, CardActionArea, InputAdornment, TextField, Toolbar
 import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
 import { ItemProperties } from "./types";
 import { useState } from "react";
-import { title } from "process";
 
 export function Header() {
   return (
@@ -30,31 +29,24 @@ export function Header() {
             direction="row"
             sx={{ justifyContent: "space-between", alignItems: "stretch" }}
           >
-            {/* Header */}
-            <Link
-              href="./"
-              sx={{ textDecoration: "none", color: "inherit" }}
+            <Typography
+              gutterBottom
+              variant="h2"
             >
-              <Typography
-                gutterBottom
-                variant="h2"
-              >
-                <TypeAnimation
-                  sequence={[
-                    "Derek Sturm, Software Engineer",
-                    1000,
-                    "Derek Sturm, Web Developer",
-                    1000,
-                    "Derek Sturm, Game Developer",
-                    1000
-                  ]}
-                  speed={25}
-                  repeat={Infinity}
-                />
-              </Typography>
-            </Link>
+              <TypeAnimation
+                sequence={[
+                  "Derek Sturm, Software Engineer",
+                  1000,
+                  "Derek Sturm, Web Developer",
+                  1000,
+                  "Derek Sturm, Game Developer",
+                  1000
+                ]}
+                speed={25}
+                repeat={Infinity}
+              />
+            </Typography>
 
-            {/* Social Links */}
             <Stack
               direction="row"
               spacing={3}
@@ -96,8 +88,8 @@ export function Sidebar() {
         [ "Contact", "contact" ]
       ].map((item, index) => (
         <Link
-          href={item[1]}
-          key={`#${item[1]}`}
+          href={`#${item[1]}`}
+          key={item[1]}
           sx={{ textDecoration: "none", color: "inherit" }}
         >
           <Typography
@@ -194,7 +186,7 @@ export async function ContactSendEmail() {
         variant="h3"
         id="contact"
       >
-        {title}
+        "Contact Me"
       </Typography>
 
       <Card>
