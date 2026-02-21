@@ -8,15 +8,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import Masonry from "@mui/lab/Masonry";
 import Link from "@mui/material/Link";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
-import { AppBar, Box, CardActionArea, InputAdornment, TextField, Toolbar } from "@mui/material";
+import { AppBar, Box, CardActionArea, Toolbar } from "@mui/material";
 import { ItemProperties } from "./types";
 import { useState } from "react";
-import { Search } from "@mui/icons-material";
 
 export function Header() {
   return (
@@ -185,7 +182,9 @@ export function ItemCard({ item }: { item: ItemProperties }) {
         >
           {item.tags.map((tag1, i1) => (
             <>
-              <Typography>
+              <Typography
+                gutterBottom
+              >
                 {tag1.name}
               </Typography>
 
