@@ -45,7 +45,7 @@ export default function Home() {
                   <Info />
                 </InputAdornment>
               ),
-           },
+            },
           }}
         />
       </main>
