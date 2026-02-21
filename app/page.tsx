@@ -1,6 +1,6 @@
 import { Stack, Toolbar, Typography } from "@mui/material";
-import { Header, Sidebar } from "./lib/components";
-import { List, ContactSendEmail } from "./lib/list";
+import { Header, Sidebar, ContactSendEmail } from "./lib/components";
+import { List } from "./lib/list";
 
 export default function Home() {
   return (
@@ -18,7 +18,9 @@ export default function Home() {
           
         </Typography>
 
-        <Stack>
+        <Stack
+          sx={{ marginLeft: 175 }}
+        >
           <List
             title="Projects"
             id="projects"

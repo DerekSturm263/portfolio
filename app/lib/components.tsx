@@ -7,6 +7,10 @@ import Stack from "@mui/material/Stack";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { TypeAnimation } from "react-type-animation";
+import { useState } from "react";
+import { Button, Card, CardActions, CardContent, InputAdornment, TextField } from "@mui/material";
+import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
+import sendEmail from "./email";
 
 export function Header() {
   return (
@@ -72,6 +76,7 @@ export function Sidebar() {
   return (
     <Stack
       spacing={2}
+      sx={{ position: "fixed", left: 0 }}
     >
       {[
         [ "Projects", "projects" ],
@@ -94,4 +99,85 @@ export function Sidebar() {
       ))}
     </Stack>
   );
+}
+
+export async function ContactSendEmail() {
+  const [ subject, setSubject ] = useState("");
+  const [ senderEmail, setSenderEmail ] = useState("");
+  const [ message, setMessage ] = useState("");
+
+  return (
+    <Stack>
+      <Typography
+        variant="h3"
+        id="contact"
+      >
+        Contact Me
+      </Typography>
+
+      <Card>
+        <CardContent>
+          <TextField
+            label="Subject"
+            variant="filled"
+            fullWidth
+            onChange={(e) => setSubject(e.target.value)}
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Info />
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
+
+          <TextField
+            label="Your Email"
+            variant="filled"
+            fullWidth
+            onChange={(e) => setSenderEmail(e.target.value)}
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
+
+          <TextField
+            label="Message"
+            variant="filled"
+            fullWidth
+            rows={6}
+            multiline
+            onChange={(e) => setMessage(e.target.value)}
+              slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Notes />
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
+        </CardContent>
+
+        <CardActions>
+          <Button
+            variant="text"
+            onClick={() => sendEmail(subject, senderEmail, message)}
+            startIcon={<Send />}
+          >
+            Send
+          </Button>
+        </CardActions>
+      </Card>
+    </Stack>
+  )
 }
