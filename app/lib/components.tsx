@@ -84,29 +84,31 @@ export function Header() {
 }
 
 export function Sidebar() {
-  <Stack
-    spacing={2}
-  >
-    {[
-      [ "Projects", "projects" ],
-      [ "Work Experience", "work-experience" ],
-      [ "Volunteer Experience", "volunteer-experience" ],
-      [ "Certifications", "certifications" ],
-      [ "Contact", "contact" ]
-    ].map((item, index) => (
-      <Link
-        href={item[1]}
-        key={`#${item[1]}`}
-        sx={{ textDecoration: "none", color: "inherit" }}
-      >
-        <Typography
-          variant="h6"
+  return (
+    <Stack
+      spacing={2}
+    >
+      {[
+        [ "Projects", "projects" ],
+        [ "Work Experience", "work-experience" ],
+        [ "Volunteer Experience", "volunteer-experience" ],
+        [ "Certifications", "certifications" ],
+        [ "Contact", "contact" ]
+      ].map((item, index) => (
+        <Link
+          href={item[1]}
+          key={`#${item[1]}`}
+          sx={{ textDecoration: "none", color: "inherit" }}
         >
-          {item[0]}
-        </Typography>
-      </Link>
-    ))}
-  </Stack>
+          <Typography
+            variant="h6"
+          >
+            {item[0]}
+          </Typography>
+        </Link>
+      ))}
+    </Stack>
+  );
 }
 
 export function ItemCard({ item }: { item: ItemProperties }) {

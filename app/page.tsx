@@ -1,5 +1,5 @@
 import { Stack, Toolbar, Typography } from "@mui/material";
-import { ContactSendEmail, Header } from "./lib/components";
+import { ContactSendEmail, Header, Sidebar } from "./lib/components";
 import { List } from "./lib/list";
 
 export default function Home() {
@@ -7,6 +7,8 @@ export default function Home() {
     <div>
       <main>
         <Header />
+        <Sidebar />
+        
         <Toolbar />
         <Toolbar />
 
