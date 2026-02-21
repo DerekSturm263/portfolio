@@ -8,6 +8,7 @@ export default function Home() {
       <main>
         <Header />
         <Toolbar />
+        <Toolbar />
 
         <Typography variant="body1">
           

@@ -14,6 +14,7 @@ import { AppBar, Box, Button, CardActionArea, InputAdornment, TextField, Toolbar
 import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
 import { ItemProperties } from "./types";
 import { useState } from "react";
+import { title } from "process";
 
 export function Header() {
   return (
@@ -188,25 +189,31 @@ export async function ContactSendEmail() {
   }
 
   return (
-    <Card
-      id="contact"
-    >
-      <CardContent>
-        <TextField
-          label="Subject"
-          variant="filled"
-          fullWidth
-          onChange={(e) => setSubject(e.target.value)}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="end">
-                  <Info />
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
+    <Stack>
+      <Typography
+        variant="h3"
+        id="contact"
+      >
+        {title}
+      </Typography>
+
+      <Card>
+        <CardContent>
+          <TextField
+            label="Subject"
+            variant="filled"
+            fullWidth
+            onChange={(e) => setSubject(e.target.value)}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <Info />
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
 
         <TextField
           label="Your Email"
@@ -253,5 +260,6 @@ export async function ContactSendEmail() {
         </Button>
       </CardActions>
     </Card>
+    </Stack>
   )
 }

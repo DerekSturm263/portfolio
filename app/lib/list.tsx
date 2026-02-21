@@ -12,7 +12,7 @@ export async function List({ title, id }: { title: string; id: string }) {
   return (
     <Stack>
       <Typography
-        variant="h2"
+        variant="h3"
         id={id}
       >
         {title}
