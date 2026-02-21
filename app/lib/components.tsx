@@ -96,7 +96,7 @@ export function Sidebar() {
     ].map((item, index) => (
       <Link
         href={item[1]}
-        key={index}
+        key={`#${item[1]}`}
         sx={{ textDecoration: "none", color: "inherit" }}
       >
         <Typography
