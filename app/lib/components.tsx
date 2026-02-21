@@ -11,7 +11,8 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
-import { AppBar, Box, CardActionArea, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, CardActionArea, InputAdornment, TextField, Toolbar } from "@mui/material";
+import { Info, MultilineChart, Send } from "@mui/icons-material";
 import { ItemProperties } from "./types";
 import { useState } from "react";
 
@@ -202,4 +203,68 @@ export function ItemCard({ item }: { item: ItemProperties }) {
       </CardActionArea>
     </Card>
   );
+}
+
+export function ContactSendEmail() {
+  return (
+    <Stack>
+      <TextField
+              label="Subject"
+              variant="filled"
+              fullWidth
+              onChange={(e) => {}}
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Info />
+                    </InputAdornment>
+                  ),
+               },
+              }}
+            />
+
+            <TextField
+          label="Sender Email"
+          variant="filled"
+          fullWidth
+          onChange={(e) => {}}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <MultilineChart />
+                </InputAdornment>
+              ),
+           },
+          }}
+        />
+
+        <TextField
+          label="Message"
+          variant="filled"
+          fullWidth
+          rows={4}
+          multiline
+          onChange={(e) => {}}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Info />
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
+
+        <Button
+          variant="contained"
+          onClick={() => {}}
+          startIcon={<Send />}
+         >
+          Send
+        </Button>
+    </Stack>
+  )
 }
