@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Contact information for Derek Sturm"
 };
 
-export default function Home() {
+export default async function Home() {
   return (
     <div>
       <main>

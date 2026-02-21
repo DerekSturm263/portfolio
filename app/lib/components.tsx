@@ -183,9 +183,7 @@ export function ItemCard({ item }: { item: ItemProperties }) {
         >
           {item.tags.map((tag1, i1) => (
             <>
-              <Typography
-                gutterBottom
-              >
+              <Typography>
                 {tag1.name}
               </Typography>
 
@@ -205,66 +203,76 @@ export function ItemCard({ item }: { item: ItemProperties }) {
   );
 }
 
-export function ContactSendEmail() {
+export async function ContactSendEmail() {
+  const [ subject, setSubject ] = useState("");
+  const [ senderEmail, setSenderEmail ] = useState("");
+  const [ message, setMessage ] = useState("");
+
+  async function sendEmail() {
+
+  }
+
   return (
     <Stack>
+      <Toolbar />
+
       <TextField
-              label="Subject"
-              variant="filled"
-              fullWidth
-              onChange={(e) => {}}
-              slotProps={{
-                input: {
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Info />
-                    </InputAdornment>
-                  ),
-               },
-              }}
-            />
+        label="Subject"
+        variant="filled"
+        fullWidth
+        onChange={(e) => setSubject(e.target.value)}
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <Info />
+              </InputAdornment>
+            ),
+          },
+        }}
+      />
 
-            <TextField
-          label="Sender Email"
-          variant="filled"
-          fullWidth
-          onChange={(e) => {}}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <MultilineChart />
-                </InputAdornment>
-              ),
-           },
-          }}
-        />
+      <TextField
+        label="Sender Email"
+        variant="filled"
+        fullWidth
+        onChange={(e) => setSenderEmail(e.target.value)}
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <MultilineChart />
+              </InputAdornment>
+            ),
+         },
+        }}
+      />
 
-        <TextField
-          label="Message"
-          variant="filled"
-          fullWidth
-          rows={4}
-          multiline
-          onChange={(e) => {}}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Info />
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
+      <TextField
+        label="Message"
+        variant="filled"
+        fullWidth
+        rows={4}
+        multiline
+        onChange={(e) => setMessage(e.target.value)}
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <Info />
+              </InputAdornment>
+            ),
+          },
+        }}
+      />
 
-        <Button
-          variant="contained"
-          onClick={() => {}}
-          startIcon={<Send />}
-         >
-          Send
-        </Button>
+      <Button
+        variant="contained"
+        onClick={() => sendEmail()}
+        startIcon={<Send />}
+        >
+        Send
+      </Button>
     </Stack>
   )
 }
