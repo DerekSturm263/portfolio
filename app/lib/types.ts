@@ -5,8 +5,8 @@ export interface ItemProperties {
   subDescription: string;
   mediaType: "img" | "video";
   media: string;
-  tags: TagGroup[];
   link: string;
+  tags: TagGroup[];
 }
 
 export interface TagGroup {

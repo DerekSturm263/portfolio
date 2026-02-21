@@ -13,7 +13,7 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
-import { AppBar, CardActionArea, InputAdornment, TextField, Toolbar } from "@mui/material";
+import { AppBar, Box, CardActionArea, InputAdornment, TextField, Toolbar } from "@mui/material";
 import { ItemProperties } from "./types";
 import { useState } from "react";
 import { Search } from "@mui/icons-material";
@@ -119,22 +119,6 @@ export function List({ items }: { items: ItemProperties[] }) {
     <Stack>
       <Toolbar />
 
-      <TextField
-        label="Search"
-        variant="outlined"
-        fullWidth
-        onChange={(e) => setSearchTerm(e.target.value)}
-        slotProps={{
-          input: {
-            startAdornment: (
-              <InputAdornment position="end">
-                <Search />
-              </InputAdornment>
-            ),
-          },
-        }}
-      />
-
       <Masonry
         columns={3}
         spacing={5}
@@ -200,14 +184,20 @@ export function ItemCard({ item }: { item: ItemProperties }) {
           sx={{ flexWrap: "wrap", rowGap: "8px" }}
         >
           {item.tags.map((tag1, i1) => (
-            <Typography>
-              {tag1.tags.map((tag2, i2) => (
-                <Chip
-                  label={tag2}
-                  key={tag2}
-                />
-              ))}
-            </Typography>
+            <>
+              <Typography>
+                {tag1.name}
+              </Typography>
+
+              <Box>
+                {tag1.tags.map((tag2, i2) => (
+                  <Chip
+                    label={tag2}
+                    key={tag2}
+                  />
+                ))}
+              </Box>
+            </>
           ))}
         </CardActions>
       </CardActionArea>
