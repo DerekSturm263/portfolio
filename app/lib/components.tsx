@@ -15,6 +15,7 @@ import { AppBar, Box, Button, CardActionArea, InputAdornment, TextField, Toolbar
 import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
 import { ItemProperties } from "./types";
 import { useState } from "react";
+import { getAll } from "./database";
 
 export function Header() {
   return (
@@ -77,54 +78,58 @@ export function Header() {
               ))}
             </Stack>
           </Stack>
-
-          {/* Navigation Bar */}
-          <Stack
-            direction="row"
-            spacing={3}
-            sx={{ justifyContent: "center", backgroundColor: "rgba(0, 0, 0, 0.25)" }}
-          >
-            {[
-              [ "Projects", "projects" ],
-              [ "Work Experience", "work-experience" ],
-              [ "Volunteer Experience", "volunteer-experience" ],
-              [ "Certifications", "certifications" ],
-              [ "Contact", "contact" ]
-            ].map((item, index) => (
-              <Link
-                href={item[1]}
-                key={index}
-                sx={{ textDecoration: "none", color: "inherit" }}
-              >
-                <Typography
-                  variant="h6"
-                >
-                  {item[0]}
-                </Typography>
-              </Link>
-            ))}
-          </Stack>
         </Stack>
       </Toolbar>
     </AppBar>
   );
 }
 
-export function List({ items }: { items: ItemProperties[] }) {
-  const [ searchTerm, setSearchTerm ] = useState("");
+export function Sidebar() {
+  <Stack
+    spacing={2}
+  >
+    {[
+      [ "Projects", "projects" ],
+      [ "Work Experience", "work-experience" ],
+      [ "Volunteer Experience", "volunteer-experience" ],
+      [ "Certifications", "certifications" ],
+      [ "Contact", "contact" ]
+    ].map((item, index) => (
+      <Link
+        href={item[1]}
+        key={index}
+        sx={{ textDecoration: "none", color: "inherit" }}
+      >
+        <Typography
+          variant="h6"
+        >
+          {item[0]}
+        </Typography>
+      </Link>
+    ))}
+  </Stack>
+}
+
+export async function List({ title, id }: { title: string; id: string }) {
+  const items = await getAll<ItemProperties>(id);
 
   return (
     <Stack>
-      <Toolbar />
+      <Typography
+        variant="h2"
+        id={id}
+      >
+        {title}
+      </Typography>
 
       <Masonry
         columns={3}
         spacing={5}
         sx={{ width: "80%", margin: "auto" }}
       >
-        {items.filter(item => item.title.toLowerCase().includes(searchTerm.toLowerCase())).map((project, index) => (
+        {items.map((item, index) => (
           <ItemCard
-            item={project}
+            item={item}
             key={index}
           />
         ))}
@@ -213,7 +218,9 @@ export async function ContactSendEmail() {
   }
 
   return (
-    <Card>
+    <Card
+      id="contact"
+    >
       <CardContent>
         <TextField
           label="Subject"
