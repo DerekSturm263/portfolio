@@ -1,4 +1,4 @@
-'use server'
+'use client'
 
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
@@ -6,7 +6,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
-import Masonry from "@mui/lab/Masonry";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -15,7 +14,6 @@ import { AppBar, Box, Button, CardActionArea, InputAdornment, TextField, Toolbar
 import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
 import { ItemProperties } from "./types";
 import { useState } from "react";
-import { getAll } from "./database";
 
 export function Header() {
   return (
@@ -108,34 +106,6 @@ export function Sidebar() {
       </Link>
     ))}
   </Stack>
-}
-
-export async function List({ title, id }: { title: string; id: string }) {
-  const items = await getAll<ItemProperties>(id);
-
-  return (
-    <Stack>
-      <Typography
-        variant="h2"
-        id={id}
-      >
-        {title}
-      </Typography>
-
-      <Masonry
-        columns={3}
-        spacing={5}
-        sx={{ width: "80%", margin: "auto" }}
-      >
-        {items.map((item, index) => (
-          <ItemCard
-            item={item}
-            key={index}
-          />
-        ))}
-      </Masonry>
-    </Stack>
-  );
 }
 
 export function ItemCard({ item }: { item: ItemProperties }) {

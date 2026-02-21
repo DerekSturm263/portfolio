@@ -1,5 +1,6 @@
 import { Stack, Toolbar, Typography } from "@mui/material";
-import { ContactSendEmail, Header, List } from "./lib/components";
+import { ContactSendEmail, Header } from "./lib/components";
+import { List } from "./lib/list";
 
 export default function Home() {
   return (
