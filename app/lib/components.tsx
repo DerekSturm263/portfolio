@@ -1,4 +1,4 @@
-'use client'
+'use server'
 
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
