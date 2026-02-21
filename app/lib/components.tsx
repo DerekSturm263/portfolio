@@ -10,7 +10,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
-import { AppBar, Box, Button, CardActionArea, InputAdornment, TextField, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, CardActionArea, CardHeader, InputAdornment, TextField, Toolbar } from "@mui/material";
 import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
 import { ItemProperties } from "./types";
 import { useState } from "react";
@@ -114,26 +114,23 @@ export function ItemCard({ item }: { item: ItemProperties }) {
           src={item.media}
           image={item.media}
         />
+        
+        <CardHeader>
+          <Typography
+            variant="h5"
+          >
+            {item.title}
+          </Typography>
 
-        <CardContent>
-          <Link
-            href={item.link}
-            sx={{ textDecoration: "none", color: "inherit" }}
+          <Typography
+            variant="h6"
             gutterBottom
           >
-            <Typography
-              variant="h5"
-            >
-              {item.title}
-            </Typography>
+            {item.subTitle}
+          </Typography>
+        </CardHeader>
 
-            <Typography
-              variant="h6"
-            >
-              {item.subTitle}
-            </Typography>
-          </Link>
-
+        <CardContent>
           <Typography
             variant="body1"
           >
@@ -148,24 +145,24 @@ export function ItemCard({ item }: { item: ItemProperties }) {
           </Typography>
         </CardContent>
 
-          {item.tags.map((tag1, i1) => (
-        <CardActions
-          sx={{ flexWrap: "wrap", rowGap: "8px" }}
-        >
-              <Typography>
-                {tag1.name}
-              </Typography>
+        {item.tags.map((tag1) => (
+          <CardActions
+            sx={{ flexWrap: "wrap", rowGap: "8px" }}
+          >
+            <Typography>
+              {tag1.name}
+            </Typography>
 
-              <Box>
-                {tag1.tags.map((tag2, i2) => (
-                  <Chip
-                    label={tag2}
-                    key={tag2}
-                  />
-                ))}
-              </Box>
-        </CardActions>
-          ))}
+            <Box>
+              {tag1.tags.map((tag2) => (
+                <Chip
+                  label={tag2}
+                  key={tag2}
+                />
+              ))}
+            </Box>
+          </CardActions>
+        ))}
       </CardActionArea>
     </Card>
   );
