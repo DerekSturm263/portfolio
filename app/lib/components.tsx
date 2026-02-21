@@ -4,15 +4,16 @@ import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Chip from "@mui/material/Chip";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import { TypeAnimation } from "react-type-animation";
-import { AppBar, Box, Button, CardActionArea, CardHeader, InputAdornment, TextField, Toolbar } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import Toolbar from "@mui/material/Toolbar";
 import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
-import { ItemProperties } from "./types";
+import { TypeAnimation } from "react-type-animation";
 import { useState } from "react";
 
 export function Header() {
@@ -100,71 +101,6 @@ export function Sidebar() {
         </Link>
       ))}
     </Stack>
-  );
-}
-
-export function ItemCard({ item }: { item: ItemProperties }) {
-  return (
-    <Card
-      sx={{ width: 300 }}
-    >
-      <CardActionArea>
-        <CardMedia
-          component={item.mediaType}
-          src={item.media}
-          image={item.media}
-        />
-
-        <CardContent>
-          <CardHeader>
-            <Typography
-              variant="h5"
-            >
-              {item.title}
-            </Typography>
-
-            <Typography
-              variant="h6"
-              gutterBottom
-            >
-              {item.subTitle}
-            </Typography>
-          </CardHeader>
-
-          <Typography
-            variant="body1"
-          >
-            {item.description}
-          </Typography>
-
-          <Typography
-            gutterBottom
-            variant="body2"
-          >
-            {item.subDescription}
-          </Typography>
-        </CardContent>
-
-        {item.tags.map((tag1) => (
-          <CardActions
-            sx={{ flexWrap: "wrap", rowGap: "8px" }}
-          >
-            <Typography>
-              {tag1.name}
-            </Typography>
-
-            <Box>
-              {tag1.tags.map((tag2) => (
-                <Chip
-                  label={tag2}
-                  key={tag2}
-                />
-              ))}
-            </Box>
-          </CardActions>
-        ))}
-      </CardActionArea>
-    </Card>
   );
 }
 
