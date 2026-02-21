@@ -207,51 +207,51 @@ export async function ContactSendEmail() {
             }}
           />
 
-        <TextField
-          label="Your Email"
-          variant="filled"
-          fullWidth
-          onChange={(e) => setSenderEmail(e.target.value)}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="end">
-                  <AccountCircle />
-                </InputAdornment>
-              ),
-           },
-          }}
-        />
+          <TextField
+            label="Your Email"
+            variant="filled"
+            fullWidth
+            onChange={(e) => setSenderEmail(e.target.value)}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
 
-        <TextField
-          label="Message"
-          variant="filled"
-          fullWidth
-          rows={6}
-          multiline
-          onChange={(e) => setMessage(e.target.value)}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="end">
-                  <Notes />
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
-      </CardContent>
+          <TextField
+            label="Message"
+            variant="filled"
+            fullWidth
+            rows={6}
+            multiline
+            onChange={(e) => setMessage(e.target.value)}
+              slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <Notes />
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
+        </CardContent>
 
-      <CardActions>
-        <Button
-          variant="contained"
-          onClick={() => sendEmail()}
-          startIcon={<Send />}
+        <CardActions>
+          <Button
+            variant="contained"
+            onClick={() => sendEmail()}
+            startIcon={<Send />}
           >
-          Send
-        </Button>
-      </CardActions>
-    </Card>
+            Send
+          </Button>
+        </CardActions>
+      </Card>
     </Stack>
   )
 }
