@@ -40,15 +40,15 @@ function ItemCard({ item }: { item: ItemProperties }) {
       sx={{ width: 300 }}
     >
       <CardActionArea>
-        <CardHeader
-          title={item.title}
-          subheader={item.subTitle}
-        />
-
         <CardMedia
           component={item.mediaType}
           src={item.media}
           image={item.media}
+        />
+
+        <CardHeader
+          title={item.title}
+          subheader={item.subTitle}
         />
 
         <CardContent>
