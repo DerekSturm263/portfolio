@@ -154,11 +154,10 @@ export function ItemCard({ item }: { item: ItemProperties }) {
           </Typography>
         </CardContent>
 
+          {item.tags.map((tag1, i1) => (
         <CardActions
           sx={{ flexWrap: "wrap", rowGap: "8px" }}
         >
-          {item.tags.map((tag1, i1) => (
-            <>
               <Typography>
                 {tag1.name}
               </Typography>
@@ -171,9 +170,8 @@ export function ItemCard({ item }: { item: ItemProperties }) {
                   />
                 ))}
               </Box>
-            </>
-          ))}
         </CardActions>
+          ))}
       </CardActionArea>
     </Card>
   );
