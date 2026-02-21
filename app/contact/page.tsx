@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "../lib/components";
-import { InputAdornment, TextField, Toolbar } from "@mui/material";
-import { Info } from "@mui/icons-material";
+import { Button, InputAdornment, TextField, Toolbar } from "@mui/material";
+import { Info, Send } from "@mui/icons-material";
 
 export const metadata: Metadata = {
   title: "Contact | Derek Sturm",
@@ -48,6 +48,14 @@ export default function Home() {
             },
           }}
         />
+
+        <Button
+          variant="contained"
+          onClick={() => {}}
+          startIcon={<Send />}
+         >
+          Send
+        </Button>
       </main>
     </div>
   );
