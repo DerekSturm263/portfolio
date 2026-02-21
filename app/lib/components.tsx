@@ -213,66 +213,68 @@ export async function ContactSendEmail() {
   }
 
   return (
-    <Stack>
-      <Toolbar />
+    <Card>
+      <CardContent>
+        <TextField
+          label="Subject"
+          variant="filled"
+          fullWidth
+          onChange={(e) => setSubject(e.target.value)}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Info />
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
 
-      <TextField
-        label="Subject"
-        variant="filled"
-        fullWidth
-        onChange={(e) => setSubject(e.target.value)}
-        slotProps={{
-          input: {
-            endAdornment: (
-              <InputAdornment position="end">
-                <Info />
-              </InputAdornment>
-            ),
-          },
-        }}
-      />
+        <TextField
+          label="Your Email"
+          variant="filled"
+          fullWidth
+          onChange={(e) => setSenderEmail(e.target.value)}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <AccountCircle />
+                </InputAdornment>
+              ),
+           },
+          }}
+        />
 
-      <TextField
-        label="Sender Email"
-        variant="filled"
-        fullWidth
-        onChange={(e) => setSenderEmail(e.target.value)}
-        slotProps={{
-          input: {
-            endAdornment: (
-              <InputAdornment position="end">
-                <AccountCircle />
-              </InputAdornment>
-            ),
-         },
-        }}
-      />
+        <TextField
+          label="Message"
+          variant="filled"
+          fullWidth
+          rows={6}
+          multiline
+          onChange={(e) => setMessage(e.target.value)}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Notes />
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
+      </CardContent>
 
-      <TextField
-        label="Message"
-        variant="filled"
-        fullWidth
-        rows={4}
-        multiline
-        onChange={(e) => setMessage(e.target.value)}
-        slotProps={{
-          input: {
-            endAdornment: (
-              <InputAdornment position="end">
-                <Notes />
-              </InputAdornment>
-            ),
-          },
-        }}
-      />
-
-      <Button
-        variant="contained"
-        onClick={() => sendEmail()}
-        startIcon={<Send />}
-        >
-        Send
-      </Button>
-    </Stack>
+      <CardActions>
+        <Button
+          variant="contained"
+          onClick={() => sendEmail()}
+          startIcon={<Send />}
+          >
+          Send
+        </Button>
+      </CardActions>
+    </Card>
   )
 }
