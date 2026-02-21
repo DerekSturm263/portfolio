@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { TypeAnimation } from "react-type-animation";
 import { AppBar, Box, Button, CardActionArea, InputAdornment, TextField, Toolbar } from "@mui/material";
-import { Info, MultilineChart, Send } from "@mui/icons-material";
+import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
 import { ItemProperties } from "./types";
 import { useState } from "react";
 
@@ -241,7 +241,7 @@ export async function ContactSendEmail() {
           input: {
             endAdornment: (
               <InputAdornment position="end">
-                <MultilineChart />
+                <AccountCircle />
               </InputAdornment>
             ),
          },
@@ -259,7 +259,7 @@ export async function ContactSendEmail() {
           input: {
             endAdornment: (
               <InputAdornment position="end">
-                <Info />
+                <Notes />
               </InputAdornment>
             ),
           },
