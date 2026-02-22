@@ -1,17 +1,18 @@
 import { Stack, Toolbar, Typography } from "@mui/material";
-import { Header, Sidebar, ContactSendEmail } from "./lib/components";
+import { Header, Sidebar, ContactMe, AboutMe } from "./lib/components";
 import { List } from "./lib/list";
+import { Props } from "./lib/types";
+import { Folder, SoupKitchen, SvgIconComponent, Work, WorkspacePremium } from "@mui/icons-material";
 
-export default function Home() {
+export default async function Home({ params, searchParams }: Props) {
+  const urlParams = await searchParams;
+
   return (
     <div>
-      <main
-        style={{ scrollBehavior: "smooth" }}
-      >
+      <main>
         <Header />
         <Sidebar />
 
-        <Toolbar />
         <Toolbar />
 
         <Typography variant="body1">
@@ -19,29 +20,25 @@ export default function Home() {
         </Typography>
 
         <Stack
-          sx={{ marginLeft: 175 }}
+          sx={{ marginLeft: "300px" }}
         >
-          <List
-            title="Projects"
-            id="projects"
-          />
+          <AboutMe />
 
-          <List
-            title="Work Experience"
-            id="work-experience"
-          />
+          {[
+            [ <Folder />, "Projects", "projects" ],
+            [ <Work />, "Work Experience", "work-experience" ],
+            [ <SoupKitchen />, "Volunteer Experience", "volunteer-experience" ],
+            [ <WorkspacePremium />, "Certifications", "certifications" ]
+          ].map((item, index) => (
+            <List
+              icon={item[0] as Element as SvgIconComponent}
+              title={item[1].toString()}
+              id={item[2].toString()}
+              key={index}
+            />
+          ))}
 
-          <List
-            title="Volunteer Experience"
-            id="volunteer-experience"
-          />
-
-          <List
-            title="Certifications"
-            id="certifications"
-          />
-
-          <ContactSendEmail />
+          <ContactMe />
         </Stack>
       </main>
     </div>

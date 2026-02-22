@@ -6,11 +6,11 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import sendEmail from "./email";
 import { TypeAnimation } from "react-type-animation";
 import { useState } from "react";
-import { Button, Card, CardActions, CardContent, InputAdornment, TextField } from "@mui/material";
-import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
-import sendEmail from "./email";
+import { Button, Card, CardActions, CardContent, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from "@mui/material";
+import { AccountCircle, Folder, Info, Mail, Notes, Send, SoupKitchen, Work, WorkspacePremium } from "@mui/icons-material";
 
 export function Header() {
   return (
@@ -27,8 +27,7 @@ export function Header() {
             sx={{ justifyContent: "space-between", alignItems: "stretch" }}
           >
             <Typography
-              gutterBottom
-              variant="h2"
+              variant="h4"
             >
               <TypeAnimation
                 sequence={[
@@ -36,7 +35,7 @@ export function Header() {
                   1000,
                   "Derek Sturm, Web Developer",
                   1000,
-                  "Derek Sturm, Game Developer",
+                  "Derek Sturm, Gameplay Programmer",
                   1000
                 ]}
                 speed={25}
@@ -61,6 +60,7 @@ export function Header() {
                   <Avatar
                     src={item[1]}
                     variant="square"
+                    sx={{ width: 36, height: 36 }}
                   />
                 </Link>
               ))}
@@ -74,49 +74,110 @@ export function Header() {
 
 export function Sidebar() {
   return (
-    <Stack
-      spacing={2}
-      sx={{ position: "fixed", left: 0 }}
+    <Drawer
+      variant="persistent"
+      sx={{ width: 250 }}
+      anchor="left"
+      open={true}
     >
-      {[
-        [ "Projects", "projects" ],
-        [ "Work Experience", "work-experience" ],
-        [ "Volunteer Experience", "volunteer-experience" ],
-        [ "Certifications", "certifications" ],
-        [ "Contact", "contact" ]
-      ].map((item, index) => (
-        <Link
-          href={`#${item[1]}`}
-          key={item[1]}
-          sx={{ textDecoration: "none", color: "inherit" }}
-        >
-          <Typography
-            variant="h6"
+      <Toolbar />
+
+      <List>
+        {[
+          [ <Info />, "About Me", "#about" ],
+          [ <Folder />, "Projects", "#projects" ],
+          [ <Work />, "Work Experience", "#work-experience" ],
+          [ <SoupKitchen />, "Volunteer Experience", "#volunteer-experience" ],
+          [ <WorkspacePremium />, "Certifications", "#certifications" ],
+          [ <Mail />, "Contact Me", "#contact" ]
+        ].map((item, index) => (
+          <ListItem
+            key={index}
           >
-            {item[0]}
-          </Typography>
-        </Link>
-      ))}
+            <ListItemButton
+              href={item[2].toString()}
+            >
+              <ListItemIcon>
+                {item[0]}
+              </ListItemIcon>
+
+              <ListItemText>
+                {item[1]}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Drawer>
+  );
+}
+
+export function AboutMe() {
+  return (
+    <Stack
+      id="about"
+      sx={{ width: "95%", margin: "auto" }}
+    >
+      <Typography
+        variant="h4"
+        gutterBottom
+      >
+        About Me
+      </Typography>
+    
+      <Typography
+        variant="body1"
+        gutterBottom
+      >
+        <TypeAnimation
+          sequence={[
+            "Hello! My name is Derek and I am a software developer with a passion for creating innovative and efficient solutions. I have experience in a variety of programming languages and frameworks, and I am always eager to learn new technologies. In my free time, I enjoy working on personal projects, contributing to open source, and staying up-to-date with the latest trends in the tech industry."
+          ]}
+          speed={99}
+          preRenderFirstString
+          cursor={false}
+        />
+      </Typography>
     </Stack>
   );
 }
 
-export async function ContactSendEmail() {
+export function ContactMe() {
   const [ subject, setSubject ] = useState("");
   const [ senderEmail, setSenderEmail ] = useState("");
   const [ message, setMessage ] = useState("");
 
   return (
-    <Stack>
+    <Stack
+      id="contact"
+      sx={{ width: "95%", margin: "auto" }}
+    >
       <Typography
-        variant="h3"
-        id="contact"
+        variant="h4"
+        gutterBottom
       >
         Contact Me
       </Typography>
 
       <Card>
         <CardContent>
+          <TextField
+            label="Your Email Address"
+            variant="filled"
+            fullWidth
+            onChange={(e) => setSenderEmail(e.target.value)}
+            type="email"
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
+
           <TextField
             label="Subject"
             variant="filled"
@@ -127,22 +188,6 @@ export async function ContactSendEmail() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <Info />
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
-
-          <TextField
-            label="Your Email"
-            variant="filled"
-            fullWidth
-            onChange={(e) => setSenderEmail(e.target.value)}
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <AccountCircle />
                   </InputAdornment>
                 ),
               },
@@ -173,6 +218,7 @@ export async function ContactSendEmail() {
             variant="text"
             onClick={() => sendEmail(subject, senderEmail, message)}
             startIcon={<Send />}
+            fullWidth
           >
             Send
           </Button>

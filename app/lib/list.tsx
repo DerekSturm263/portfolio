@@ -1,29 +1,33 @@
 'use server'
 
-import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, InputAdornment, Stack, TextField, Typography } from "@mui/material";
-import getAll from "./database";
-import sendEmail from './email';
+import { Box, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Icon, Stack, Typography } from "@mui/material";
 import { ItemProperties } from "./types";
+import getAll from "./database";
 import Masonry from "@mui/lab/Masonry";
-import { AccountCircle, Info, Notes, Send } from "@mui/icons-material";
+import { Info, SvgIconComponent } from "@mui/icons-material";
 
-export async function List({ title, id }: { title: string; id: string }) {
+export async function List({ icon, title, id }: { icon: SvgIconComponent, title: string; id: string }) {
   const items = await getAll<ItemProperties>(id);
+  const Icon = icon;
 
   return (
-    <Stack>
+    <Stack
+      id={id}
+      sx={{ width: "95%", margin: "auto" }}
+    >
       <Typography
-        variant="h3"
-        id={id}
+        variant="h4"
+        gutterBottom
       >
+        <Icon/>
+           
         {title}
       </Typography>
 
       <Masonry
-        columns={2}
-        spacing={5}
+        columns={3}
+        spacing={4}
         sequential
-        sx={{ width: "80%", margin: "auto" }}
       >
         {items.map((item, index) => (
           <ItemCard
@@ -44,7 +48,7 @@ function ItemCard({ item }: { item: ItemProperties }) {
       <CardActionArea>
         <CardMedia
           component={item.mediaType}
-          src={item.media}
+          src={item.media == "" ? undefined : item.media}
           image={item.media}
         />
 
@@ -56,34 +60,46 @@ function ItemCard({ item }: { item: ItemProperties }) {
         <CardContent>
           <Typography
             variant="body1"
+            gutterBottom
           >
             {item.description}
           </Typography>
 
           <Typography
-            gutterBottom
             variant="body2"
+            sx={{ marginTop: "8px" }}
           >
             {item.subDescription}
           </Typography>
         </CardContent>
 
-        {item.tags.map((tag1) => (
+        {item.tags.map((tag1, index) => (
           <CardActions
-            sx={{ flexWrap: "wrap", rowGap: "8px" }}
+            sx={{ paddingLeft: "16px", paddingRight: "16px" }}
+            key={index}
           >
-            <Typography>
-              {tag1.name}
-            </Typography>
+            <Stack
+              sx={{ width: "100%" }}
+            >
+              <Typography
+                gutterBottom
+              >
+                {tag1.name}
+              </Typography>
 
-            <Box>
-              {tag1.tags.map((tag2) => (
-                <Chip
-                  label={tag2}
-                  key={tag2}
-                />
-              ))}
-            </Box>
+              <Stack
+                direction="row"
+                sx={{ overflowX: "scroll", scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {tag1.tags.map((tag2, index2) => (
+                  <Chip
+                    label={tag2}
+                    key={tag2}
+                    sx={{ marginRight: index2 != tag1.tags.length - 1 ? "8px" : 0, marginBottom: "8px" }}
+                  />
+                ))}
+              </Stack>
+            </Stack>
           </CardActions>
         ))}
       </CardActionArea>
