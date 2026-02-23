@@ -120,9 +120,10 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
       >
         <Icon
           fontSize="large"
+          sx={{ marginBottom: "-4px" }}
         />
 
-        {title}
+        {` ${title}`}
       </Typography>
       
       {Children.map(children, child => 
