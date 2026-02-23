@@ -16,10 +16,6 @@ export default async function Home({ params, searchParams }: Props) {
 
         <Toolbar />
 
-        <Typography variant="body1">
-          
-        </Typography>
-
         <Stack
           sx={{ marginLeft: "300px" }}
         >

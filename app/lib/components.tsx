@@ -118,7 +118,9 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
         variant="h4"
         gutterBottom
       >
-        <Icon />
+        <Icon
+          fontSize="large"
+        />
 
         {title}
       </Typography>
