@@ -9,18 +9,18 @@ export async function List({ id }: { id: string }) {
   const items = await getAll<ItemProperties>(id);
 
   return (
-      <Masonry
-        columns={3}
-        spacing={4}
-        sequential
-      >
-        {items.map((item, index) => (
-          <ItemCard
-            item={item}
-            key={index}
-          />
-        ))}
-      </Masonry>
+    <Masonry
+      columns={3}
+      spacing={4}
+      sequential
+    >
+      {items.map((item, index) => (
+        <ItemCard
+          item={item}
+          key={index}
+        />
+      ))}
+    </Masonry>
   );
 }
 

@@ -1,6 +1,6 @@
 import pages from "./lib/pages";
 import { Stack, Toolbar, Typography } from "@mui/material";
-import { Header, Sidebar, ContactMe, AboutMe, Section } from "./lib/components";
+import { Header, Sidebar, ContactMe, AboutMe, Section, ItemDialog } from "./lib/components";
 import { List } from "./lib/list";
 import { Props } from "./lib/types";
 import { CheckBoxOutlineBlank } from "@mui/icons-material";
@@ -13,6 +13,10 @@ export default async function Home({ params, searchParams }: Props) {
       <main>
         <Header />
         <Sidebar />
+
+        <ItemDialog
+          item={null}
+        />
 
         <Toolbar />
         <Toolbar />

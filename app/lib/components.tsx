@@ -10,8 +10,9 @@ import sendEmail from "./email";
 import pages from "./pages";
 import { TypeAnimation } from "react-type-animation";
 import { Children, useState } from "react";
-import { Button, Card, CardActions, CardContent, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField, Tooltip } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField, Tooltip } from "@mui/material";
 import { AccountCircle, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
+import { ItemProperties } from "./types";
 
 export function Header() {
   return (
@@ -123,7 +124,6 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
       <Typography
         variant="h4"
         gutterBottom
-        sx={{ position: "sticky" }}
       >
         <Icon
           fontSize="large"
@@ -147,18 +147,18 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
 export function AboutMe() {
   return (
     <Typography
-        variant="body1"
-        gutterBottom
-      >
-        <TypeAnimation
-          sequence={[
-            "Hello! My name is Derek and I am a software developer with a passion for creating innovative and efficient solutions. I have experience in a variety of programming languages and frameworks, and I am always eager to learn new technologies. In my free time, I enjoy working on personal projects, contributing to open source, and staying up-to-date with the latest trends in the tech industry."
-          ]}
-          speed={99}
-          preRenderFirstString
-          cursor={false}
-        />
-      </Typography>
+      variant="body1"
+      gutterBottom
+    >
+      <TypeAnimation
+        sequence={[
+          "Hello! My name is Derek and I am a software developer with a passion for creating innovative and efficient solutions. I have experience in a variety of programming languages and frameworks, and I am always eager to learn new technologies. In my free time, I enjoy working on personal projects, contributing to open source, and staying up-to-date with the latest trends in the tech industry."
+        ]}
+        speed={99}
+        preRenderFirstString
+        cursor={false}
+      />
+    </Typography>
   );
 }
 
@@ -168,70 +168,108 @@ export function ContactMe() {
   const [ message, setMessage ] = useState("");
 
   return (
-      <Card>
-        <CardContent>
-          <TextField
-            label="Your Email Address"
-            variant="filled"
-            fullWidth
-            onChange={(e) => setSenderEmail(e.target.value)}
-            type="email"
+    <Card>
+      <CardContent>
+        <TextField
+          label="Your Email Address"
+          variant="filled"
+          fullWidth
+          onChange={(e) => setSenderEmail(e.target.value)}
+          type="email"
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <AccountCircle />
+                </InputAdornment>
+              ),
+            }
+          }}
+        />
+
+        <TextField
+          label="Subject"
+          variant="filled"
+          fullWidth
+          onChange={(e) => setSubject(e.target.value)}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Info />
+                </InputAdornment>
+              ),
+            }
+          }}
+        />
+
+        <TextField
+          label="Message"
+          variant="filled"
+          fullWidth
+          rows={6}
+          multiline
+          onChange={(e) => setMessage(e.target.value)}
             slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <AccountCircle />
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Notes />
+                </InputAdornment>
+              ),
+            }
+          }}
+        />
+      </CardContent>
 
-          <TextField
-            label="Subject"
-            variant="filled"
-            fullWidth
-            onChange={(e) => setSubject(e.target.value)}
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Info />
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
+      <CardActions>
+        <Button
+          variant="text"
+          onClick={() => sendEmail(subject, senderEmail, message)}
+          startIcon={<Send />}
+          fullWidth
+        >
+          Send
+        </Button>
+      </CardActions>
+    </Card>
+  )
+}
 
-          <TextField
-            label="Message"
-            variant="filled"
-            fullWidth
-            rows={6}
-            multiline
-            onChange={(e) => setMessage(e.target.value)}
-              slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Notes />
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
-        </CardContent>
+export function ItemDialog({ item }: { item: ItemProperties | null }) {
+  const [ isOpen, setIsOpen ] = useState(false);
 
-        <CardActions>
-          <Button
-            variant="text"
-            onClick={() => sendEmail(subject, senderEmail, message)}
-            startIcon={<Send />}
-            fullWidth
-          >
-            Send
-          </Button>
-        </CardActions>
-      </Card>
+  return (
+    <Dialog
+      open={isOpen}
+      onClose={(e) => setIsOpen(false)}
+    >
+      <DialogTitle>
+        {item?.title ?? ""}
+      </DialogTitle>
+
+      <DialogTitle>
+        {item?.subTitle ?? ""}
+      </DialogTitle>
+
+      <DialogContent>
+        <DialogContentText>
+          {item?.description ?? ""}
+        </DialogContentText>
+        
+        <DialogContentText>
+          {item?.subDescription ?? ""}
+        </DialogContentText>
+      </DialogContent>
+
+      <DialogActions>
+        <Button
+          variant="text"
+          fullWidth
+        >
+          Learn More
+        </Button>
+      </DialogActions>
+    </Dialog>
   )
 }
