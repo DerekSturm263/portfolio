@@ -123,6 +123,7 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
       <Typography
         variant="h4"
         gutterBottom
+        sx={{ position: "sticky" }}
       >
         <Icon
           fontSize="large"
