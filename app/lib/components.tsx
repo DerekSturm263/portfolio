@@ -137,6 +137,8 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
           {child}
         </>
       )}
+
+      <Toolbar />
     </Stack>
   );
 }
