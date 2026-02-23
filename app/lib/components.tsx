@@ -10,7 +10,7 @@ import sendEmail from "./email";
 import pages from "./pages";
 import { TypeAnimation } from "react-type-animation";
 import { Children, useState } from "react";
-import { Button, Card, CardActions, CardContent, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField, Tooltip } from "@mui/material";
 import { AccountCircle, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 
 export function Header() {
@@ -50,20 +50,24 @@ export function Header() {
               sx={{ alignItems: "center" }}
             >
               {[
-                [ "https://www.linkedin.com/in/derek-sturm/", "/icons/linked-in.png" ],
-                [ "https://github.com/DerekSturm263/", "/icons/github.svg" ],
-                [ "https://dereksturm263.itch.io/", "/icons/itch-io.svg" ]
+                [ "https://www.linkedin.com/in/derek-sturm/", "/icons/linked-in.png", "Visit my LinkedIn" ],
+                [ "https://github.com/DerekSturm263/", "/icons/github.svg", "Visit my GitHub" ],
+                [ "https://dereksturm263.itch.io/", "/icons/itch-io.svg", "Visit my Itch.io" ]
               ].map((item, index) => (
-                <Link
-                  href={item[0]}
-                  key={index}
+                <Tooltip
+                  title={item[2]}
                 >
-                  <Avatar
-                    src={item[1]}
-                    variant="square"
-                    sx={{ width: 36, height: 36 }}
-                  />
-                </Link>
+                  <Link
+                    href={item[0]}
+                    key={index}
+                  >
+                    <Avatar
+                      src={item[1]}
+                      variant="square"
+                      sx={{ width: 36, height: 36 }}
+                    />
+                  </Link>
+                </Tooltip>
               ))}
             </Stack>
           </Stack>
