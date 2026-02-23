@@ -1,3 +1,5 @@
+"use client"
+
 import pages from "./lib/pages";
 import { Stack, Toolbar, Typography } from "@mui/material";
 import { Header, Sidebar, ContactMe, AboutMe, Section, ItemDialog } from "./lib/components";
