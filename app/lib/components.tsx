@@ -3,11 +3,10 @@
 import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
-import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Button, Card, CardActions, CardContent, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
-import { Children, Dispatch, SetStateAction, useState } from "react";
+import { Children, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
-import { ItemProperties } from "./types";
 
 export function Header() {
   return (
@@ -229,109 +228,4 @@ export function ContactMe() {
       </CardActions>
     </Card>
   )
-}
-
-export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolean, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, item: ItemProperties | null }) {
-  return (
-    <Dialog
-      open={isOpen}
-      onClose={(e) => setIsOpenCallback(false)}
-    >
-      <DialogTitle>
-        {item?.title ?? ""}
-      </DialogTitle>
-
-      <DialogTitle>
-        {item?.subTitle ?? ""}
-      </DialogTitle>
-
-      <DialogContent>
-        <DialogContentText>
-          {item?.description ?? ""}
-        </DialogContentText>
-        
-        <DialogContentText>
-          {item?.subDescription ?? ""}
-        </DialogContentText>
-      </DialogContent>
-
-      <DialogActions>
-        <Button
-          variant="text"
-          fullWidth
-        >
-          Learn More
-        </Button>
-      </DialogActions>
-    </Dialog>
-  )
-}
-
-export function ItemCard({ item, setIsOpenCallback }: { item: ItemProperties, setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
-  return (
-    <Card
-      sx={{ width: 300 }}
-    >
-      <CardActionArea
-        onClick={(e) => setIsOpenCallback(true)}
-      >
-        <CardMedia
-          component={item.mediaType}
-          src={item.media == "" ? undefined : item.media}
-          image={item.media}
-        />
-
-        <CardHeader
-          title={item.title}
-          subheader={item.subTitle}
-        />
-
-        <CardContent>
-          <Typography
-            variant="body1"
-            gutterBottom
-          >
-            {item.description}
-          </Typography>
-
-          <Typography
-            variant="body2"
-            sx={{ marginTop: "8px" }}
-          >
-            {item.subDescription}
-          </Typography>
-        </CardContent>
-
-        {item.tags.map((tag1, index) => (
-          <CardActions
-            sx={{ paddingLeft: "16px", paddingRight: "16px" }}
-            key={index}
-          >
-            <Stack
-              sx={{ width: "100%" }}
-            >
-              <Typography
-                gutterBottom
-              >
-                {tag1.name}
-              </Typography>
-
-              <Stack
-                direction="row"
-                sx={{ overflowX: "scroll", scrollbarWidth: "none", msOverflowStyle: "none" }}
-              >
-                {tag1.tags.map((tag2, index2) => (
-                  <Chip
-                    label={tag2}
-                    key={tag2}
-                    sx={{ marginRight: index2 != tag1.tags.length - 1 ? "8px" : 0, marginBottom: "8px" }}
-                  />
-                ))}
-              </Stack>
-            </Stack>
-          </CardActions>
-        ))}
-      </CardActionArea>
-    </Card>
-  );
 }
