@@ -9,7 +9,7 @@ import Toolbar from "@mui/material/Toolbar";
 import sendEmail from "./email";
 import pages from "./pages";
 import { TypeAnimation } from "react-type-animation";
-import { Children, useState } from "react";
+import { Children, Dispatch, SetStateAction, useState } from "react";
 import { Button, Card, CardActions, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField, Tooltip } from "@mui/material";
 import { AccountCircle, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { ItemProperties } from "./types";
@@ -236,13 +236,11 @@ export function ContactMe() {
   )
 }
 
-export function ItemDialog({ item }: { item: ItemProperties | null }) {
-  const [ isOpen, setIsOpen ] = useState(false);
-
+export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolean, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, item: ItemProperties | null }) {
   return (
     <Dialog
       open={isOpen}
-      onClose={(e) => setIsOpen(false)}
+      onClose={(e) => setIsOpenCallback(false)}
     >
       <DialogTitle>
         {item?.title ?? ""}

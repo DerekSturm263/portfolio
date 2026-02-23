@@ -1,11 +1,12 @@
 'use server'
 
 import { Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Stack, Typography } from "@mui/material";
+import { Dispatch, SetStateAction } from "react";
 import { ItemProperties } from "./types";
 import getAll from "./database";
 import Masonry from "@mui/lab/Masonry";
 
-export async function List({ id }: { id: string }) {
+export async function List({ id, setIsOpenCallback }: { id: string, setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
   const items = await getAll<ItemProperties>(id);
 
   return (
@@ -18,18 +19,21 @@ export async function List({ id }: { id: string }) {
         <ItemCard
           item={item}
           key={index}
+          setIsOpenCallback={setIsOpenCallback}
         />
       ))}
     </Masonry>
   );
 }
 
-function ItemCard({ item }: { item: ItemProperties }) {
+function ItemCard({ item, setIsOpenCallback }: { item: ItemProperties, setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
   return (
     <Card
       sx={{ width: 300 }}
     >
-      <CardActionArea>
+      <CardActionArea
+        onClick={(e) => setIsOpenCallback(true)}
+      >
         <CardMedia
           component={item.mediaType}
           src={item.media == "" ? undefined : item.media}

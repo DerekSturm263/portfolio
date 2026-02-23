@@ -2,11 +2,15 @@ import pages from "./lib/pages";
 import { Stack, Toolbar, Typography } from "@mui/material";
 import { Header, Sidebar, ContactMe, AboutMe, Section, ItemDialog } from "./lib/components";
 import { List } from "./lib/list";
-import { Props } from "./lib/types";
+import { ItemProperties, Props } from "./lib/types";
 import { CheckBoxOutlineBlank } from "@mui/icons-material";
+import { useState } from "react";
 
 export default async function Home({ params, searchParams }: Props) {
   const urlParams = await searchParams;
+
+  const [ dialogItem, setDialogItem ] = useState<ItemProperties>();
+  const [ isOpen, setIsOpen ] = useState(false);
 
   return (
     <div>
@@ -15,6 +19,8 @@ export default async function Home({ params, searchParams }: Props) {
         <Sidebar />
 
         <ItemDialog
+          isOpen={isOpen}
+          setIsOpenCallback={setIsOpen}
           item={null}
         />
 
@@ -41,6 +47,7 @@ export default async function Home({ params, searchParams }: Props) {
             >
               <List
                 id={item.id}
+                setIsOpenCallback={() => { setIsOpen }}
               />
             </Section>
           ))}
