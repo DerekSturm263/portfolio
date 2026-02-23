@@ -8,9 +8,7 @@ import { ItemProperties, Props } from "./lib/types";
 import { CheckBoxOutlineBlank } from "@mui/icons-material";
 import { useState } from "react";
 
-export default async function Home({ params, searchParams }: Props) {
-  const urlParams = await searchParams;
-
+export default function Home({ params, searchParams }: Props) {
   const [ dialogItem, setDialogItem ] = useState<ItemProperties>();
   const [ isOpen, setIsOpen ] = useState(false);
 
