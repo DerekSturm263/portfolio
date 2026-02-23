@@ -89,14 +89,14 @@ export function Sidebar() {
             key={index}
           >
             <ListItemButton
-              href={`#${item[2]}`}
+              href={`#${item.id}`}
             >
               <ListItemIcon>
-                {item[0]}
+                <item.icon />
               </ListItemIcon>
 
               <ListItemText>
-                {item[1]}
+                {item.title}
               </ListItemText>
             </ListItemButton>
           </ListItem>
