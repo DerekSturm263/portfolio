@@ -15,6 +15,7 @@ export default async function Home({ params, searchParams }: Props) {
         <Sidebar />
 
         <Toolbar />
+        <Toolbar />
 
         <Stack
           sx={{ marginLeft: "300px" }}
