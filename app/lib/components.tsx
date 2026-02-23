@@ -87,7 +87,9 @@ export function Sidebar() {
     >
       <Toolbar />
 
-      <List>
+      <List
+        sx={{ margin: "auto" }}
+      >
         {pages.map((item, index) => (
           <ListItem
             key={index}
@@ -124,7 +126,7 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
       >
         <Icon
           fontSize="large"
-          sx={{ marginBottom: "-4px" }}
+          sx={{ marginBottom: "-5px" }}
         />
 
         {` ${title}`}
