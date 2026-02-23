@@ -1,8 +1,9 @@
+import pages from "./lib/pages";
 import { Stack, Toolbar, Typography } from "@mui/material";
-import { Header, Sidebar, ContactMe, AboutMe } from "./lib/components";
+import { Header, Sidebar, ContactMe, AboutMe, Section } from "./lib/components";
 import { List } from "./lib/list";
 import { Props } from "./lib/types";
-import { Folder, SoupKitchen, SvgIconComponent, Work, WorkspacePremium } from "@mui/icons-material";
+import { CheckBoxOutlineBlank } from "@mui/icons-material";
 
 export default async function Home({ params, searchParams }: Props) {
   const urlParams = await searchParams;
@@ -22,23 +23,34 @@ export default async function Home({ params, searchParams }: Props) {
         <Stack
           sx={{ marginLeft: "300px" }}
         >
-          <AboutMe />
+          <Section
+            title={pages[0].title}
+            id={pages[0].id}
+            icon={pages[0].icon}
+          >
+            <AboutMe />
+          </Section>
 
-          {[
-            [ <Folder />, "Projects", "projects" ],
-            [ <Work />, "Work Experience", "work-experience" ],
-            [ <SoupKitchen />, "Volunteer Experience", "volunteer-experience" ],
-            [ <WorkspacePremium />, "Certifications", "certifications" ]
-          ].map((item, index) => (
-            <List
-              icon={item[0] as Element as SvgIconComponent}
-              title={item[1].toString()}
-              id={item[2].toString()}
+          {pages.slice(1, pages.length - 1).map((item, index) => (
+            <Section
+              title={item.title}
+              id={item.id}
+              icon={item.icon}
               key={index}
-            />
+            >
+              <List
+                id={item.id}
+              />
+            </Section>
           ))}
 
-          <ContactMe />
+          <Section
+            title={pages.at(-1)?.title ?? ""}
+            id={pages.at(-1)?.id ?? ""}
+            icon={pages.at(-1)?.icon ?? CheckBoxOutlineBlank}
+          >
+            <ContactMe />
+          </Section>
         </Stack>
       </main>
     </div>

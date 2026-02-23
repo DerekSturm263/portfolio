@@ -1,29 +1,14 @@
 'use server'
 
-import { Box, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Icon, Stack, Typography } from "@mui/material";
+import { Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Stack, Typography } from "@mui/material";
 import { ItemProperties } from "./types";
 import getAll from "./database";
 import Masonry from "@mui/lab/Masonry";
-import { Info, SvgIconComponent } from "@mui/icons-material";
 
-export async function List({ icon, title, id }: { icon: SvgIconComponent, title: string; id: string }) {
+export async function List({ id }: { id: string }) {
   const items = await getAll<ItemProperties>(id);
-  const Icon = icon;
 
   return (
-    <Stack
-      id={id}
-      sx={{ width: "95%", margin: "auto" }}
-    >
-      <Typography
-        variant="h4"
-        gutterBottom
-      >
-        <Icon/>
-           
-        {title}
-      </Typography>
-
       <Masonry
         columns={3}
         spacing={4}
@@ -36,7 +21,6 @@ export async function List({ icon, title, id }: { icon: SvgIconComponent, title:
           />
         ))}
       </Masonry>
-    </Stack>
   );
 }
 

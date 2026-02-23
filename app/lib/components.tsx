@@ -7,10 +7,11 @@ import Stack from "@mui/material/Stack";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import sendEmail from "./email";
+import pages from "./pages";
 import { TypeAnimation } from "react-type-animation";
-import { useState } from "react";
+import { Children, useState } from "react";
 import { Button, Card, CardActions, CardContent, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from "@mui/material";
-import { AccountCircle, Folder, Info, Mail, Notes, Send, SoupKitchen, Work, WorkspacePremium } from "@mui/icons-material";
+import { AccountCircle, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 
 export function Header() {
   return (
@@ -83,19 +84,12 @@ export function Sidebar() {
       <Toolbar />
 
       <List>
-        {[
-          [ <Info />, "About Me", "#about" ],
-          [ <Folder />, "Projects", "#projects" ],
-          [ <Work />, "Work Experience", "#work-experience" ],
-          [ <SoupKitchen />, "Volunteer Experience", "#volunteer-experience" ],
-          [ <WorkspacePremium />, "Certifications", "#certifications" ],
-          [ <Mail />, "Contact Me", "#contact" ]
-        ].map((item, index) => (
+        {pages.map((item, index) => (
           <ListItem
             key={index}
           >
             <ListItemButton
-              href={item[2].toString()}
+              href={`#${item[2]}`}
             >
               <ListItemIcon>
                 {item[0]}
@@ -112,20 +106,35 @@ export function Sidebar() {
   );
 }
 
-export function AboutMe() {
+export function Section({ title, id, icon, children }: { title: string, id: string, icon: SvgIconComponent, children: React.ReactNode }) {
+  const Icon = icon;
+
   return (
     <Stack
-      id="about"
+      id={id}
       sx={{ width: "95%", margin: "auto" }}
     >
       <Typography
         variant="h4"
         gutterBottom
       >
-        About Me
+        <Icon />
+
+        {title}
       </Typography>
-    
-      <Typography
+      
+      {Children.map(children, child => 
+        <>
+          {child}
+        </>
+      )}
+    </Stack>
+  );
+}
+
+export function AboutMe() {
+  return (
+    <Typography
         variant="body1"
         gutterBottom
       >
@@ -138,7 +147,6 @@ export function AboutMe() {
           cursor={false}
         />
       </Typography>
-    </Stack>
   );
 }
 
@@ -148,17 +156,6 @@ export function ContactMe() {
   const [ message, setMessage ] = useState("");
 
   return (
-    <Stack
-      id="contact"
-      sx={{ width: "95%", margin: "auto" }}
-    >
-      <Typography
-        variant="h4"
-        gutterBottom
-      >
-        Contact Me
-      </Typography>
-
       <Card>
         <CardContent>
           <TextField
@@ -224,6 +221,5 @@ export function ContactMe() {
           </Button>
         </CardActions>
       </Card>
-    </Stack>
   )
 }
