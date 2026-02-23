@@ -1,5 +1,3 @@
-import { SvgIconComponent } from "@mui/icons-material";
-
 export interface ItemProperties {
   title: string;
   subTitle: string;

@@ -1,10 +1,10 @@
 import pages from "./lib/pages";
-import { Stack, Toolbar, Typography } from "@mui/material";
 import { Header, Sidebar, ContactMe, AboutMe, Section, ItemDialog } from "./lib/components";
-import { List } from "./lib/list";
+import { Stack, Toolbar } from "@mui/material";
 import { ItemProperties, Props } from "./lib/types";
-import { CheckBoxOutlineBlank } from "@mui/icons-material";
 import { useState } from "react";
+import { CheckBoxOutlineBlank } from "@mui/icons-material";
+import { List } from "./lib/list";
 
 export default async function Home({ params, searchParams }: Props) {
   const urlParams = await searchParams;

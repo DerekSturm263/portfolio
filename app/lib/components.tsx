@@ -1,17 +1,12 @@
 'use client'
 
-import Avatar from "@mui/material/Avatar";
-import Link from "@mui/material/Link";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import sendEmail from "./email";
 import pages from "./pages";
-import { TypeAnimation } from "react-type-animation";
-import { Children, Dispatch, SetStateAction, useState } from "react";
-import { Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField, Tooltip } from "@mui/material";
+import sendEmail from "./email";
+import Link from "next/link";
+import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
+import { Children, Dispatch, SetStateAction, useState } from "react";
+import { TypeAnimation } from "react-type-animation";
 import { ItemProperties } from "./types";
 
 export function Header() {
@@ -51,9 +46,9 @@ export function Header() {
               sx={{ alignItems: "center" }}
             >
               {[
-                [ "https://www.linkedin.com/in/derek-sturm/", "/icons/linked-in.png", "Visit my LinkedIn" ],
-                [ "https://github.com/DerekSturm263/", "/icons/github.svg", "Visit my GitHub" ],
-                [ "https://dereksturm263.itch.io/", "/icons/itch-io.svg", "Visit my Itch.io" ]
+                [ "https://www.linkedin.com/in/derek-sturm/", "/icons/linked-in.png", "LinkedIn" ],
+                [ "https://github.com/DerekSturm263/", "/icons/github.svg", "GitHub" ],
+                [ "https://dereksturm263.itch.io/", "/icons/itch-io.svg", "Itch.io" ]
               ].map((item, index) => (
                 <Tooltip
                   title={item[2]}
