@@ -8,7 +8,7 @@ import { CheckBoxOutlineBlank } from "@mui/icons-material";
 import { List } from "./lib/list";
 
 export default async function Home({ params, searchParams }: Props) {
-  const [ dialogItem, setDialogItem ] = [ {}, () => {} ];
+  const [ dialogItem, setDialogItem ] = [ {} as ItemProperties, () => {} ];
   const [ isOpen, setIsOpen ] = [ false, () => {} ];
 
   return (
