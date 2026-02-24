@@ -1,17 +1,8 @@
-'use client'
+import { Header, Sidebar, Everything } from "./lib/components";
+import { Toolbar } from "@mui/material";
+import { Params, SearchParams } from "./lib/types";
 
-import pages from "./lib/pages";
-import { Header, Sidebar, ContactMe, AboutMe, Section, ItemDialog } from "./lib/components";
-import { Stack, Toolbar } from "@mui/material";
-import { ItemProperties, Params, SearchParams } from "./lib/types";
-import { CheckBoxOutlineBlank } from "@mui/icons-material";
-import { List } from "./lib/list";
-import { useState } from "react";
-
-export default function Page() {
-  const [ isOpen, setIsOpen ] = useState(false);
-  const [ item, setItem ] = useState({} as ItemProperties);
-
+export default async function Home({ params, searchParams }: { params: Promise<Params>, searchParams: Promise<SearchParams> }) {
   return (
     <div>
       <main>
@@ -21,46 +12,10 @@ export default function Page() {
         <Toolbar />
         <Toolbar />
 
-        <ItemDialog
-          isOpen={isOpen}
-          setIsOpenCallback={setIsOpen}
-          item={item}
+        <Everything
+          params={await params}
+          searchParams={await searchParams}
         />
-
-        <Stack
-          sx={{ marginLeft: "300px" }}
-        >
-          <Section
-            title={pages[0].title}
-            id={pages[0].id}
-            icon={pages[0].icon}
-          >
-            <AboutMe />
-          </Section>
-
-          {pages.slice(1, pages.length - 1).map((item, index) => (
-            <Section
-              title={item.title}
-              id={item.id}
-              icon={item.icon}
-              key={index}
-            >
-              <List
-                id={item.id}
-                setIsOpenCallback={setIsOpen}
-                setItemCallback={setItem}
-              />
-            </Section>
-          ))}
-
-          <Section
-            title={pages.at(-1)?.title ?? ""}
-            id={pages.at(-1)?.id ?? ""}
-            icon={pages.at(-1)?.icon ?? CheckBoxOutlineBlank}
-          >
-            <ContactMe />
-          </Section>
-        </Stack>
       </main>
     </div>
   );

@@ -14,5 +14,5 @@ export interface TagGroup {
   tags: string[];
 }
 
-export type Params = Promise<{ slug: string }>;
-export type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+export type Params = { slug: string };
+export type SearchParams = { [key: string]: string | string[] | undefined };
