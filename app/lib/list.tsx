@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction } from "react";
 import { ItemProperties, SearchParams } from "./types";
 import { ItemCard } from "./components";
 
-export async function ItemList({ id, setIsOpenCallback, setItemCallback, searchParams }: { id: string, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<ItemProperties>>, searchParams: Promise<SearchParams> }) {
+export async function ItemList({ id, setIsOpenCallback, setItemCallback }: { id: string, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<ItemProperties>> }) {
   const items = await getAll<ItemProperties>(id);
 
   return (

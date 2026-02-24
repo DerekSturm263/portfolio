@@ -10,7 +10,7 @@ import { TypeAnimation } from "react-type-animation";
 import { ItemProperties, Params, SearchParams } from "./types";
 import { ItemList } from "./list";
 
-export function Everything({ params, searchParams }: { params: Promise<Params>, searchParams: Promise<SearchParams> }) {
+export function Everything() {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ item, setItem ] = useState({} as ItemProperties);
 
@@ -44,7 +44,6 @@ export function Everything({ params, searchParams }: { params: Promise<Params>, 
               id={item.id}
               setIsOpenCallback={setIsOpen}
               setItemCallback={setItem}
-              searchParams={searchParams}
             />
           </Section>
         ))}

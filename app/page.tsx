@@ -2,7 +2,7 @@ import { Header, Sidebar, Everything } from "./lib/components";
 import { Toolbar } from "@mui/material";
 import { Params, SearchParams } from "./lib/types";
 
-export default  function Home({ params, searchParams }: { params: Promise<Params>, searchParams: Promise<SearchParams> }) {
+export default function Page({ params, searchParams }: { params: Promise<Params>, searchParams: Promise<SearchParams> }) {
   return (
     <div>
       <main>
@@ -12,10 +12,7 @@ export default  function Home({ params, searchParams }: { params: Promise<Params
         <Toolbar />
         <Toolbar />
 
-        <Everything
-          params={params}
-          searchParams={searchParams}
-        />
+        <Everything />
       </main>
     </div>
   );
