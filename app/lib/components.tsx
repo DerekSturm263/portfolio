@@ -10,7 +10,7 @@ import { TypeAnimation } from "react-type-animation";
 import { ItemProperties, Params, SearchParams } from "./types";
 import { ItemList } from "./list";
 
-export function Everything({ params, searchParams }: { params: Params, searchParams: SearchParams }) {
+export function Everything({ params, searchParams }: { params: Promise<Params>, searchParams: Promise<SearchParams> }) {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ item, setItem ] = useState({} as ItemProperties);
 
