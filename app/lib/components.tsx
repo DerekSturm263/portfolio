@@ -4,11 +4,11 @@ import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
 import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
-import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
+import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { CardItem, Params, SearchParams } from "./types";
-import { ItemList } from "./list";
+import { Masonry } from "@mui/lab";
 
 export function Everything({ allItems, params, searchParams }: { allItems: CardItem[][], params: Params, searchParams: SearchParams }) {
   const [ isDialogOpen, setIsDialogOpen ] = useState(false);
@@ -296,6 +296,25 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
       </CardActions>
     </Card>
   )
+}
+
+export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items: CardItem[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+  return (
+    <Masonry
+      columns={3}
+      spacing={4}
+      sequential
+    >
+      {items.map((item, index) => (
+        <ItemCard
+          item={item}
+          key={index}
+          setIsOpenCallback={setIsOpenCallback}
+          setItemCallback={setItemCallback}
+        />
+      ))}
+    </Masonry>
+  );
 }
 
 export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: CardItem, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
