@@ -371,6 +371,7 @@ export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolea
       <DialogContent>
         <img
           src={item.media}
+          style={{ width: "100%" }}
         />
 
         <DialogContentText>
