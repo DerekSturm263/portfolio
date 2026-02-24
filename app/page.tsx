@@ -3,14 +3,14 @@
 import pages from "./lib/pages";
 import { Header, Sidebar, ContactMe, AboutMe, Section, ItemDialog } from "./lib/components";
 import { Stack, Toolbar } from "@mui/material";
-import { ItemProperties, Props } from "./lib/types";
+import { ItemProperties, Params, SearchParams } from "./lib/types";
 import { CheckBoxOutlineBlank } from "@mui/icons-material";
 import { List } from "./lib/list";
 import { useState } from "react";
 
-export default function Home({ params, searchParams }: Props) {
-  const [ dialogItem, setDialogItem ] = useState({} as ItemProperties);
+export default function Home({ params, searchParams }: { params: Params, searchParams: SearchParams }) {
   const [ isOpen, setIsOpen ] = useState(false);
+  const [ item, setItem ] = useState({} as ItemProperties);
 
   return (
     <div>
@@ -41,7 +41,9 @@ export default function Home({ params, searchParams }: Props) {
             >
               <List
                 id={item.id}
-                setIsOpenCallback={() => { setIsOpen }}
+                setIsOpenCallback={setIsOpen}
+                setItemCallback={setItem}
+                searchParams={searchParams}
               />
             </Section>
           ))}

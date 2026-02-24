@@ -231,13 +231,16 @@ export function ContactMe() {
   )
 }
 
-export function ItemCard({ item, setIsOpenCallback }: { item: ItemProperties, setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
+export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: ItemProperties, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<ItemProperties>> }) {
   return (
     <Card
       sx={{ width: 300 }}
     >
       <CardActionArea
-        onClick={(e) => setIsOpenCallback(true)}
+        onClick={(e) => {
+          setIsOpenCallback(true);
+          setItemCallback(item);
+        }}
       >
         <CardMedia
           component={item.mediaType}
