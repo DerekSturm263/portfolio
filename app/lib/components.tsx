@@ -52,10 +52,10 @@ export function Header() {
               ].map((item, index) => (
                 <Tooltip
                   title={item[2]}
+                  key={index}
                 >
                   <Link
                     href={item[0]}
-                    key={index}
                   >
                     <Avatar
                       src={item[1]}
