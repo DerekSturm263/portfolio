@@ -284,7 +284,10 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
       <CardActions>
         <Button
           variant="text"
-          onClick={async () => await sendEmail(name, senderEmail, message, setIsOpenCallback)}
+          onClick={async () => {
+            await sendEmail(name, senderEmail, message);
+            setIsOpenCallback(true);
+          }}
           startIcon={<Send />}
           fullWidth
         >
