@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction } from "react";
 import { ItemProperties } from "./types";
 
 export async function List({ id, setIsOpenCallback }: { id: string, setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
+  'use client'
   const items = await getAll<ItemProperties>(id);
 
   return (
