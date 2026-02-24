@@ -4,13 +4,13 @@ import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
 import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
-import { AccountCircle, CheckBoxOutlineBlank, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
+import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { CardItem, Params, SearchParams } from "./types";
 import { ItemList } from "./list";
 
-export function Everything({ allItems }: { allItems: CardItem[][] }) {
+export function Everything({ allItems, params, searchParams }: { allItems: CardItem[][], params: Params, searchParams: SearchParams }) {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ item, setItem ] = useState({} as CardItem);
 
@@ -209,7 +209,7 @@ export function AboutMe() {
 }
 
 export function ContactMe() {
-  const [ subject, setSubject ] = useState("");
+  const [ name, setYourName ] = useState("");
   const [ senderEmail, setSenderEmail ] = useState("");
   const [ message, setMessage ] = useState("");
 
@@ -226,7 +226,7 @@ export function ContactMe() {
             input: {
               endAdornment: (
                 <InputAdornment position="end">
-                  <AccountCircle />
+                  <AlternateEmail />
                 </InputAdornment>
               ),
             }
@@ -234,15 +234,15 @@ export function ContactMe() {
         />
 
         <TextField
-          label="Subject"
+          label="Your Name"
           variant="filled"
           fullWidth
-          onChange={(e) => setSubject(e.target.value)}
+          onChange={(e) => setYourName(e.target.value)}
           slotProps={{
             input: {
               endAdornment: (
                 <InputAdornment position="end">
-                  <Info />
+                  <AccountCircle />
                 </InputAdornment>
               ),
             }
@@ -271,7 +271,7 @@ export function ContactMe() {
       <CardActions>
         <Button
           variant="text"
-          onClick={() => sendEmail(subject, senderEmail, message)}
+          onClick={() => sendEmail(name, senderEmail, message)}
           startIcon={<Send />}
           fullWidth
         >
