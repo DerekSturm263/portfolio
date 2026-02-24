@@ -7,12 +7,12 @@ import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent,
 import { AccountCircle, CheckBoxOutlineBlank, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
-import { ItemProperties, Params, SearchParams } from "./types";
+import { CardItem, Params, SearchParams } from "./types";
 import { ItemList } from "./list";
 
-export function Everything() {
+export function Everything({ allItems }: { allItems: CardItem[][] }) {
   const [ isOpen, setIsOpen ] = useState(false);
-  const [ item, setItem ] = useState({} as ItemProperties);
+  const [ item, setItem ] = useState({} as CardItem);
 
   return (
     <>
@@ -41,7 +41,7 @@ export function Everything() {
             key={index}
           >
             <ItemList
-              id={item.id}
+              items={allItems[index]}
               setIsOpenCallback={setIsOpen}
               setItemCallback={setItem}
             />
@@ -282,7 +282,7 @@ export function ContactMe() {
   )
 }
 
-export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: ItemProperties, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<ItemProperties>> }) {
+export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: CardItem, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   return (
     <Card
       sx={{ width: 300 }}
@@ -354,7 +354,7 @@ export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: I
   );
 }
 
-export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolean, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, item: ItemProperties }) {
+export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolean, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, item: CardItem }) {
   return (
     <Dialog
       open={isOpen}

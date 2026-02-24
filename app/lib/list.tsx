@@ -1,15 +1,11 @@
-'use server'
+'use client'
 
 import Masonry from "@mui/lab/Masonry";
-import getAll from "./database";
-import { Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, Typography } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
-import { ItemProperties, SearchParams } from "./types";
+import { CardItem } from "./types";
 import { ItemCard } from "./components";
 
-export async function ItemList({ id, setIsOpenCallback, setItemCallback }: { id: string, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<ItemProperties>> }) {
-  const items = await getAll<ItemProperties>(id);
-
+export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items: CardItem[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   return (
     <Masonry
       columns={3}

@@ -1,4 +1,4 @@
-export interface ItemProperties {
+export interface CardItem {
   title: string;
   subTitle: string;
   description: string;
