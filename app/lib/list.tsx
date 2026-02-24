@@ -1,5 +1,3 @@
-'use server'
-
 import Masonry from "@mui/lab/Masonry";
 import getAll from "./database";
 import { Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, Typography } from "@mui/material";
