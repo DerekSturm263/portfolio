@@ -3,7 +3,7 @@
 import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
-import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -11,15 +11,23 @@ import { CardItem, Params, SearchParams } from "./types";
 import { ItemList } from "./list";
 
 export function Everything({ allItems, params, searchParams }: { allItems: CardItem[][], params: Params, searchParams: SearchParams }) {
-  const [ isOpen, setIsOpen ] = useState(false);
-  const [ item, setItem ] = useState({} as CardItem);
+  const [ isDialogOpen, setIsDialogOpen ] = useState(false);
+  const [ dialogItem, setDialogItem ] = useState({} as CardItem);
+  const [ isSnackbarOpen, setIsSnackbarOpen ] = useState(false);
 
   return (
     <>
       <ItemDialog
-        isOpen={isOpen}
-        setIsOpenCallback={setIsOpen}
-        item={item}
+        isOpen={isDialogOpen}
+        setIsOpenCallback={setIsDialogOpen}
+        item={dialogItem}
+      />
+
+      <Snackbar
+        open={isSnackbarOpen}
+        autoHideDuration={3000}
+        onClose={(e) => setIsSnackbarOpen(false)}
+        message="Email sent!"
       />
 
       <Stack
@@ -42,8 +50,8 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
           >
             <ItemList
               items={allItems[index]}
-              setIsOpenCallback={setIsOpen}
-              setItemCallback={setItem}
+              setIsOpenCallback={setIsDialogOpen}
+              setItemCallback={setDialogItem}
             />
           </Section>
         ))}
@@ -53,7 +61,9 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
           id={pages.at(-1)?.id ?? ""}
           icon={pages.at(-1)?.icon ?? CheckBoxOutlineBlank}
         >
-          <ContactMe />
+          <ContactMe
+            setIsOpenCallback={setIsSnackbarOpen}
+          />
         </Section>
       </Stack>
     </>
@@ -208,7 +218,7 @@ export function AboutMe() {
   );
 }
 
-export function ContactMe() {
+export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
   const [ name, setYourName ] = useState("");
   const [ senderEmail, setSenderEmail ] = useState("");
   const [ message, setMessage ] = useState("");
@@ -221,6 +231,7 @@ export function ContactMe() {
           variant="filled"
           fullWidth
           onChange={(e) => setYourName(e.target.value)}
+          value={name}
           slotProps={{
             input: {
               endAdornment: (
@@ -237,6 +248,7 @@ export function ContactMe() {
           variant="filled"
           fullWidth
           onChange={(e) => setSenderEmail(e.target.value)}
+          value={senderEmail}
           type="email"
           slotProps={{
             input: {
@@ -256,7 +268,8 @@ export function ContactMe() {
           rows={6}
           multiline
           onChange={(e) => setMessage(e.target.value)}
-            slotProps={{
+          value={message}
+          slotProps={{
             input: {
               endAdornment: (
                 <InputAdornment position="end">
@@ -271,7 +284,7 @@ export function ContactMe() {
       <CardActions>
         <Button
           variant="text"
-          onClick={() => sendEmail(name, senderEmail, message)}
+          onClick={() => sendEmail(name, senderEmail, message, setIsOpenCallback)}
           startIcon={<Send />}
           fullWidth
         >
