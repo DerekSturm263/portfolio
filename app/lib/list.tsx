@@ -94,39 +94,3 @@ async function ItemCard({ item, setIsOpenCallback }: { item: ItemProperties, set
     </Card>
   );
 }
-
-export async function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolean, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, item: ItemProperties | null }) {
-  return (
-    <Dialog
-      open={isOpen}
-      onClose={(e) => setIsOpenCallback(false)}
-    >
-      <DialogTitle>
-        {item?.title ?? ""}
-      </DialogTitle>
-
-      <DialogTitle>
-        {item?.subTitle ?? ""}
-      </DialogTitle>
-
-      <DialogContent>
-        <DialogContentText>
-          {item?.description ?? ""}
-        </DialogContentText>
-        
-        <DialogContentText>
-          {item?.subDescription ?? ""}
-        </DialogContentText>
-      </DialogContent>
-
-      <DialogActions>
-        <Button
-          variant="text"
-          fullWidth
-        >
-          Learn More
-        </Button>
-      </DialogActions>
-    </Dialog>
-  )
-}

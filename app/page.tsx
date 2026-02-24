@@ -1,14 +1,13 @@
 'use server'
 
 import pages from "./lib/pages";
-import { Header, Sidebar, ContactMe, AboutMe, Section } from "./lib/components";
+import { Header, Sidebar, ContactMe, AboutMe, Section, ItemDialog } from "./lib/components";
 import { Stack, Toolbar } from "@mui/material";
 import { ItemProperties, Props } from "./lib/types";
 import { CheckBoxOutlineBlank } from "@mui/icons-material";
-import { ItemDialog, List } from "./lib/list";
+import { List } from "./lib/list";
 
 export default async function Home({ params, searchParams }: Props) {
-
   const [ dialogItem, setDialogItem ] = [ {}, () => {} ];
   const [ isOpen, setIsOpen ] = [ false, () => {} ];
 
@@ -21,7 +20,7 @@ export default async function Home({ params, searchParams }: Props) {
         <ItemDialog
           isOpen={isOpen}
           setIsOpenCallback={setIsOpen}
-          item={null}
+          item={{} as ItemProperties}
         />
 
         <Toolbar />

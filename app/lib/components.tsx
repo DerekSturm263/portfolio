@@ -3,10 +3,11 @@
 import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
-import { AppBar, Avatar, Button, Card, CardActions, CardContent, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Button, Card, CardActions, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
-import { Children, useState } from "react";
+import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
+import { ItemProperties } from "./types";
 
 export function Header() {
   return (
@@ -227,5 +228,41 @@ export function ContactMe() {
         </Button>
       </CardActions>
     </Card>
+  )
+}
+
+export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolean, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, item: ItemProperties }) {
+  return (
+    <Dialog
+      open={isOpen}
+      onClose={(e) => setIsOpenCallback(false)}
+    >
+      <DialogTitle>
+        {item.title}
+      </DialogTitle>
+
+      <DialogTitle>
+        {item.subTitle}
+      </DialogTitle>
+
+      <DialogContent>
+        <DialogContentText>
+          {item.description}
+        </DialogContentText>
+        
+        <DialogContentText>
+          {item.subDescription}
+        </DialogContentText>
+      </DialogContent>
+
+      <DialogActions>
+        <Button
+          variant="text"
+          fullWidth
+        >
+          Learn More
+        </Button>
+      </DialogActions>
+    </Dialog>
   )
 }
