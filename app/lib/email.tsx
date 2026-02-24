@@ -5,7 +5,7 @@ import { Send } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 
-export default async function SendEmail({ name, senderEmail, message, setIsOpenCallback }: { name: string, senderEmail: string, message: string, setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
+export default function SendEmail({ name, senderEmail, message, setIsOpenCallback }: { name: string, senderEmail: string, message: string, setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
   return (
     <Button
       variant="text"
