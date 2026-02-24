@@ -1,7 +1,7 @@
 'use client'
 
 import pages from "./pages";
-import SendEmail from "./email";
+import sendEmail from "./email";
 import Link from "next/link";
 import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Info, Notes, Send, SvgIconComponent } from "@mui/icons-material";
@@ -282,12 +282,14 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
       </CardContent>
 
       <CardActions>
-        <SendEmail
-          name={name}
-          senderEmail={senderEmail}
-          message={message}
-          setIsOpenCallback={setIsOpenCallback}
-        />
+        <Button
+          variant="text"
+          onClick={async () => await sendEmail(name, senderEmail, message, setIsOpenCallback)}
+          startIcon={<Send />}
+          fullWidth
+        >
+          Send
+        </Button>
       </CardActions>
     </Card>
   )
