@@ -8,7 +8,7 @@ import { CheckBoxOutlineBlank } from "@mui/icons-material";
 import { List } from "./lib/list";
 import { useState } from "react";
 
-export default function Page({ params, searchParams }: { params: Params, searchParams: SearchParams }) {
+export default function Page() {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ item, setItem ] = useState({} as ItemProperties);
 
@@ -49,7 +49,6 @@ export default function Page({ params, searchParams }: { params: Params, searchP
                 id={item.id}
                 setIsOpenCallback={setIsOpen}
                 setItemCallback={setItem}
-                searchParams={searchParams}
               />
             </Section>
           ))}
