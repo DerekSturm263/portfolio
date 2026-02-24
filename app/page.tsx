@@ -17,12 +17,6 @@ export default async function Home({ params, searchParams }: Props) {
         <Header />
         <Sidebar />
 
-        <ItemDialog
-          isOpen={isOpen}
-          setIsOpenCallback={setIsOpen}
-          item={{} as ItemProperties}
-        />
-
         <Toolbar />
         <Toolbar />
 
