@@ -16,5 +16,7 @@ export default async function sendEmail(senderName: string, senderEmail: string,
     }
   );
 
+  console.log(JSON.stringify(results));
+
   setIsOpenCallback(true);
 }
