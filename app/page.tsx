@@ -1,15 +1,14 @@
-'use server'
-
 import pages from "./lib/pages";
 import { Header, Sidebar, ContactMe, AboutMe, Section, ItemDialog } from "./lib/components";
 import { Stack, Toolbar } from "@mui/material";
 import { ItemProperties, Props } from "./lib/types";
 import { CheckBoxOutlineBlank } from "@mui/icons-material";
 import { List } from "./lib/list";
+import { useState } from "react";
 
 export default async function Home({ params, searchParams }: Props) {
-  const [ dialogItem, setDialogItem ] = [ {} as ItemProperties, () => {} ];
-  const [ isOpen, setIsOpen ] = [ false, () => {} ];
+  const [ dialogItem, setDialogItem ] = useState({} as ItemProperties);
+  const [ isOpen, setIsOpen ] = useState(false);
 
   return (
     <div>
