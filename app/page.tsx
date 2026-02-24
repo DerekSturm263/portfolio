@@ -21,6 +21,12 @@ export default function Home({ params, searchParams }: { params: Params, searchP
         <Toolbar />
         <Toolbar />
 
+        <ItemDialog
+          isOpen={isOpen}
+          setIsOpenCallback={setIsOpen}
+          item={item}
+        />
+
         <Stack
           sx={{ marginLeft: "300px" }}
         >
