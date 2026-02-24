@@ -369,9 +369,9 @@ export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolea
       </DialogTitle>
 
       <DialogContent>
-        <img>
+        <img
           src={item.media}
-        </img>
+        />
 
         <DialogContentText>
           {item.description}
