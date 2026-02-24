@@ -217,6 +217,22 @@ export function ContactMe() {
     <Card>
       <CardContent>
         <TextField
+          label="Your Name"
+          variant="filled"
+          fullWidth
+          onChange={(e) => setYourName(e.target.value)}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <AccountCircle />
+                </InputAdornment>
+              ),
+            }
+          }}
+        />
+
+        <TextField
           label="Your Email Address"
           variant="filled"
           fullWidth
@@ -227,22 +243,6 @@ export function ContactMe() {
               endAdornment: (
                 <InputAdornment position="end">
                   <AlternateEmail />
-                </InputAdornment>
-              ),
-            }
-          }}
-        />
-
-        <TextField
-          label="Your Name"
-          variant="filled"
-          fullWidth
-          onChange={(e) => setYourName(e.target.value)}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <AccountCircle />
                 </InputAdornment>
               ),
             }
