@@ -8,7 +8,6 @@ import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIc
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { CardItem, Params, SearchParams } from "./types";
-import { Masonry } from "@mui/lab";
 
 export function Everything({ allItems, params, searchParams }: { allItems: CardItem[][], params: Params, searchParams: SearchParams }) {
   const [ isDialogOpen, setIsDialogOpen ] = useState(false);
@@ -231,9 +230,12 @@ export function Skills() {
     <Stack
       direction="row"
     >
-      <Chip>
-
-      </Chip>
+      {[ "", "" ].map((item, index) => (
+        <Chip
+          key={index}
+          label={item}
+        />
+      ))}
     </Stack>
   );
 }
