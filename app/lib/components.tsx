@@ -56,21 +56,16 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
         </Section>
 
         {pages.slice(2, pages.length - 1).map((item, index) => (
-          <Section
+          <ItemListWithHeader
+            allItems={allItems}
+            index={index}
             title={item.title}
             id={item.id}
-            count={allItems[index].length}
             icon={item.icon}
-            sortTags={[ "Test 1", "Test 2" ]}
-            filterTags={[ "Test 3", "Test 4" ]}
+            setIsOpenCallback={setIsDialogOpen}
+            setItemCallback={setDialogItem}
             key={index}
-          >
-            <ItemList
-              items={allItems[index]}
-              setIsOpenCallback={setIsDialogOpen}
-              setItemCallback={setDialogItem}
-            />
-          </Section>
+          />
         ))}
 
         <Section
@@ -189,7 +184,7 @@ export function Sidebar() {
   );
 }
 
-export function Section({ title, id, count, icon, children, sortTags, filterTags }: { title: string, id: string, count: number | null, icon: SvgIconComponent, sortTags: string[], filterTags: string[], children: React.ReactNode }) {
+export function Section({ title, id, count, icon, sortTags, filterTags, children }: { title: string, id: string, count: number | null, icon: SvgIconComponent, sortTags: string[], filterTags: string[], children: React.ReactNode }) {
   const Icon = icon;
 
   return (
@@ -302,6 +297,30 @@ export function Skills() {
   );
 }
 
+export function ItemListWithHeader({ allItems, index, title, id, icon, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+  const [ sortTag, setSortTag ] = useState("startDate");
+  const [ filterTags, setFilterTags ] = useState([]);
+
+  return (
+    <Section
+      title={title}
+      id={id}
+      count={allItems[index].length}
+      icon={icon}
+      sortTags={[ "startDate", "endDate", "title", "subTitle" ]}
+      filterTags={[ "Test 3", "Test 4" ]}
+    >
+      <ItemList
+        items={allItems[index]}
+        sortTag={sortTag}
+        filterTags={filterTags}
+        setIsOpenCallback={setIsOpenCallback}
+        setItemCallback={setItemCallback}
+      />
+    </Section>
+  );
+}
+
 export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
   const [ name, setYourName ] = useState("");
   const [ senderEmail, setSenderEmail ] = useState("");
@@ -384,7 +403,7 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
   )
 }
 
-export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items: CardItem[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+export function ItemList({ items, sortTag, filterTags, setIsOpenCallback, setItemCallback }: { items: CardItem[], sortTag: string, filterTags: string[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   return (
     <Stack
       direction="row"
