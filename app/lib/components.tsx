@@ -187,6 +187,7 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
       <Typography
         variant="h4"
         gutterBottom
+        sx={{ marginLeft: "50px" }}
       >
         <Icon
           fontSize="large"
@@ -326,7 +327,7 @@ export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items:
     <Stack
       direction="row"
       spacing={4}
-      sx={{ overflowX: "scroll", scrollbarWidth: "none" }}
+      sx={{ overflowX: "scroll", scrollbarWidth: "none", paddingLeft: "50px", paddingRight: "50px" }}
     >
       {items.map((item, index) => (
         <ItemCard
