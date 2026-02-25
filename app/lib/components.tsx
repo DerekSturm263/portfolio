@@ -16,7 +16,6 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
   const [ isSnackbarOpen, setIsSnackbarOpen ] = useState(false);
 
   const allSortTags: (keyof CardItem)[] = [ "startDate", "endDate", "title", "subTitle" ];
-  const allFilterTags = [ "Discord Bot", "Website", "Game", "Plugin" ];
 
   return (
     <>
@@ -74,7 +73,6 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
             id={item.id}
             icon={item.icon}
             allSortTags={allSortTags}
-            allFilterTags={allFilterTags}
             setIsOpenCallback={setIsDialogOpen}
             setItemCallback={setDialogItem}
             key={index}
@@ -343,7 +341,11 @@ export function Skills() {
   );
 }
 
-export function ItemListWithHeader({ allItems, index, title, id, icon, allSortTags, allFilterTags, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], allFilterTags: string[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+export function ItemListWithHeader({ allItems, index, title, id, icon, allSortTags, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+  const allFilterTags: string[] = Array.from(
+    new Set(allItems.flatMap(group => group.map(item => item.type)))
+  );
+  
   const [ sortTag, setSortTag ] = useState(allSortTags[0]);
   const [ filterTags, setFilterTags ] = useState(allFilterTags);
 
