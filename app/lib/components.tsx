@@ -38,6 +38,8 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           id={pages[0].id}
           count={null}
           icon={pages[0].icon}
+          sortTags={[]}
+          filterTags={[]}
         >
           <AboutMe />
         </Section>
@@ -47,6 +49,8 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           id={pages[1].id}
           count={22} // Todo: Fix hardcoding
           icon={pages[1].icon}
+          sortTags={[]}
+          filterTags={[]}
         >
           <Skills />
         </Section>
@@ -57,6 +61,8 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
             id={item.id}
             count={allItems[index].length}
             icon={item.icon}
+            sortTags={[ "Test 1", "Test 2" ]}
+            filterTags={[ "Test 3", "Test 4" ]}
             key={index}
           >
             <ItemList
@@ -72,6 +78,8 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           id={pages.at(-1)?.id ?? ""}
           count={null}
           icon={pages.at(-1)?.icon ?? CheckBoxOutlineBlank}
+          sortTags={[]}
+          filterTags={[]}
         >
           <ContactMe
             setIsOpenCallback={setIsSnackbarOpen}
@@ -181,7 +189,7 @@ export function Sidebar() {
   );
 }
 
-export function Section({ title, id, count, icon, children }: { title: string, id: string, count: number | null, icon: SvgIconComponent, children: React.ReactNode }) {
+export function Section({ title, id, count, icon, children, sortTags, filterTags }: { title: string, id: string, count: number | null, icon: SvgIconComponent, sortTags: string[], filterTags: string[], children: React.ReactNode }) {
   const Icon = icon;
 
   return (
@@ -221,7 +229,7 @@ export function Section({ title, id, count, icon, children }: { title: string, i
           <Select
             label="Sort"
           >
-            {[].map((item, index) => (
+            {sortTags.map((item, index) => (
               <MenuItem
                 value={item}
                 key={index}
@@ -234,7 +242,7 @@ export function Section({ title, id, count, icon, children }: { title: string, i
           <Select
             label="Filter"
           >
-            {[].map((item, index) => (
+            {filterTags.map((item, index) => (
               <MenuItem
                 value={item}
                 key={index}
