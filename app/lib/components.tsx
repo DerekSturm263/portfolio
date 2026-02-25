@@ -46,7 +46,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
           id={pages[1].id}
           icon={pages[1].icon}
         >
-          <AboutMe />
+          <Skills />
         </Section>
 
         {pages.slice(2, pages.length - 1).map((item, index) => (
