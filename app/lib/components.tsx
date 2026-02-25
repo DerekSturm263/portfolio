@@ -236,9 +236,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           {allSortTags.length > 0 && <Select
             label="Sort"
             value={sortTag}
-            onChange={(e) => {
-
-            }}
+            onChange={(e) => setSortTagCallback(e.target.value)}
           >
             {allSortTags.map((item, index) => (
               <MenuItem
