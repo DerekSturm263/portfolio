@@ -1,10 +1,10 @@
-import { Header, Sidebar, Everything } from "./lib/components";
-import { Toolbar } from "@mui/material";
-import getAll from "./lib/database";
-import { CardItem, Params, SearchParams } from "./lib/types";
 import pages from "./lib/pages";
+import getAll from "./lib/database";
+import { Header, Sidebar, Everything } from "./lib/components";
+import { CardItem, Properties } from "./lib/types";
+import { Toolbar } from "@mui/material";
 
-export default async function Page({ params, searchParams }: { params: Promise<Params>, searchParams: Promise<SearchParams> }) {
+export default async function Page({ slug, urlParams }: Properties) {
   const items: CardItem[][] = [];
   for (let i = 2; i < pages.length - 1; ++i) {
     items.push(await getAll<CardItem>(pages[i].id));
@@ -21,8 +21,6 @@ export default async function Page({ params, searchParams }: { params: Promise<P
 
         <Everything
           allItems={items}
-          params={await params}
-          searchParams={await searchParams}
         />
       </main>
     </div>

@@ -7,10 +7,10 @@ import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent,
 import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
-import { CardItem, Params, SearchParams } from "./types";
+import { CardItem } from "./types";
 import Markdown from "react-markdown";
 
-export function Everything({ allItems, params, searchParams }: { allItems: CardItem[][], params: Params, searchParams: SearchParams }) {
+export function Everything({ allItems }: { allItems: CardItem[][] }) {
   const [ isDialogOpen, setIsDialogOpen ] = useState(false);
   const [ dialogItem, setDialogItem ] = useState({} as CardItem);
   const [ isSnackbarOpen, setIsSnackbarOpen ] = useState(false);
@@ -203,7 +203,7 @@ export function Section({ title, id, count, icon, children }: { title: string, i
 
         {count != null && <Chip
           label={count}
-          sx={{ marginTop: -8, marginLeft: 8 }}
+          sx={{ marginTop: "-8px", marginLeft: "8px" }}
         />}
       </Typography>
 
