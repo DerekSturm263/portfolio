@@ -203,6 +203,7 @@ export function Section({ title, id, count, icon, children }: { title: string, i
 
         {count != null && <Chip
           label={count}
+          sx={{ marginTop: -8, marginLeft: 8 }}
         />}
       </Typography>
 
