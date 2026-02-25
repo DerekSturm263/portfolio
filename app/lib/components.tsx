@@ -235,6 +235,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           {allSortTags.length > 0 && <Select
             label="Sort"
             value={sortTag}
+            size="small"
             onChange={(e) => setSortTagCallback(e.target.value)}
           >
             {allSortTags.map((item, index) => (
@@ -251,6 +252,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
             label="Filter"
             value={filterTags}
             multiple
+            size="small"
             onChange={(e) => {
               const {
                 target: { value },
