@@ -8,6 +8,7 @@ import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIc
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { CardItem, Params, SearchParams } from "./types";
+import Markdown from "react-markdown";
 
 export function Everything({ allItems, params, searchParams }: { allItems: CardItem[][], params: Params, searchParams: SearchParams }) {
   const [ isDialogOpen, setIsDialogOpen ] = useState(false);
@@ -378,18 +379,23 @@ export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: C
         />
 
         <CardContent>
+          
           <Typography
             variant="body1"
             gutterBottom
           >
-            {item.description}
+            <Markdown>
+              {item.description}
+            </Markdown>
           </Typography>
 
           <Typography
             variant="body2"
             sx={{ marginTop: "8px" }}
           >
-            {item.subDescription}
+            <Markdown>
+              {item.subDescription}
+            </Markdown>
           </Typography>
         </CardContent>
 
