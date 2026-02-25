@@ -219,7 +219,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ marginLeft: "6px" }}
+            sx={{ marginLeft: "8px" }}
           >
             {title}
           </Typography>
