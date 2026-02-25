@@ -230,7 +230,7 @@ export function Skills() {
     <Stack
       direction="row"
     >
-      {[ "", "" ].map((item, index) => (
+      {[ "C# Programming", "", "", "" ].map((item, index) => (
         <Chip
           key={index}
           label={item}
@@ -325,7 +325,7 @@ export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items:
     <Stack
       direction="row"
       spacing={4}
-      sx={{ overflowX: "auto", scrollbarWidth: "none" }}
+      sx={{ overflowX: "scroll", scrollbarWidth: "none" }}
     >
       {items.map((item, index) => (
         <ItemCard
