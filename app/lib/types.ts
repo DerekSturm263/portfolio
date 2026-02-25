@@ -1,4 +1,5 @@
 export interface CardItem {
+  type: string;
   title: string;
   subTitle: string;
   description: string;

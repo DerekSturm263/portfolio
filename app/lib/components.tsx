@@ -15,6 +15,9 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
   const [ dialogItem, setDialogItem ] = useState({} as CardItem);
   const [ isSnackbarOpen, setIsSnackbarOpen ] = useState(false);
 
+  const allSortTags: (keyof CardItem)[] = [ "startDate", "endDate", "title", "subTitle" ];
+  const allFilterTags = [ "Discord Bot", "Website", "Game", "Plugin" ];
+
   return (
     <>
       <ItemDialog
@@ -40,7 +43,7 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           icon={pages[0].icon}
           allSortTags={[]}
           allFilterTags={[]}
-          sortTag=""
+          sortTag="startDate"
           filterTags={[]}
           setSortTagCallback={() => {}}
           setFilterTagsCallback={() => {}}
@@ -55,7 +58,7 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           icon={pages[1].icon}
           allSortTags={[]}
           allFilterTags={[]}
-          sortTag=""
+          sortTag="startDate"
           filterTags={[]}
           setSortTagCallback={() => {}}
           setFilterTagsCallback={() => {}}
@@ -70,6 +73,8 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
             title={item.title}
             id={item.id}
             icon={item.icon}
+            allSortTags={allSortTags}
+            allFilterTags={allFilterTags}
             setIsOpenCallback={setIsDialogOpen}
             setItemCallback={setDialogItem}
             key={index}
@@ -83,7 +88,7 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           icon={pages.at(-1)?.icon ?? CheckBoxOutlineBlank}
           allSortTags={[]}
           allFilterTags={[]}
-          sortTag=""
+          sortTag="startDate"
           filterTags={[]}
           setSortTagCallback={() => {}}
           setFilterTagsCallback={() => {}}
@@ -196,7 +201,7 @@ export function Sidebar() {
   );
 }
 
-export function Section({ title, id, count, icon, allSortTags, allFilterTags, sortTag, filterTags, setSortTagCallback, setFilterTagsCallback, children }: { title: string, id: string, count: number | null, icon: SvgIconComponent, allSortTags: string[], allFilterTags: string[], sortTag: string, filterTags: string[], setSortTagCallback: Dispatch<SetStateAction<string>>, setFilterTagsCallback: Dispatch<SetStateAction<string[]>>, children: React.ReactNode }) {
+export function Section({ title, id, count, icon, allSortTags, allFilterTags, sortTag, filterTags, setSortTagCallback, setFilterTagsCallback, children }: { title: string, id: string, count: number | null, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], allFilterTags: string[], sortTag: keyof CardItem, filterTags: string[], setSortTagCallback: Dispatch<SetStateAction<keyof CardItem>>, setFilterTagsCallback: Dispatch<SetStateAction<string[]>>, children: React.ReactNode }) {
   const Icon = icon;
 
   return (
@@ -338,9 +343,9 @@ export function Skills() {
   );
 }
 
-export function ItemListWithHeader({ allItems, index, title, id, icon, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
-  const [ sortTag, setSortTag ] = useState("startDate");
-  const [ filterTags, setFilterTags ] = useState<string[]>([]);
+export function ItemListWithHeader({ allItems, index, title, id, icon, allSortTags, allFilterTags, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], allFilterTags: string[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+  const [ sortTag, setSortTag ] = useState(allSortTags[0]);
+  const [ filterTags, setFilterTags ] = useState(allFilterTags);
 
   return (
     <Section
@@ -348,8 +353,8 @@ export function ItemListWithHeader({ allItems, index, title, id, icon, setIsOpen
       id={id}
       count={allItems[index].length}
       icon={icon}
-      allSortTags={[ "startDate", "endDate", "title", "subTitle" ]}
-      allFilterTags={[ "Test 3", "Test 4" ]}
+      allSortTags={allSortTags}
+      allFilterTags={allFilterTags}
       sortTag={sortTag}
       filterTags={filterTags}
       setSortTagCallback={setSortTag}
@@ -448,14 +453,16 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
   )
 }
 
-export function ItemList({ items, sortTag, filterTags, setIsOpenCallback, setItemCallback }: { items: CardItem[], sortTag: string, filterTags: string[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+export function ItemList({ items, sortTag, filterTags, setIsOpenCallback, setItemCallback }: { items: CardItem[], sortTag: keyof CardItem, filterTags: string[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+  const sortedAndFilteredItems = items.filter(item => filterTags.includes(item.type)).sort((a, b) => a[sortTag].toString().localeCompare(b[sortTag].toString()));
+
   return (
     <Stack
       direction="row"
       spacing={4}
       sx={{ overflowX: "scroll", scrollbarWidth: "none", paddingLeft: "50px", paddingRight: "50px" }}
     >
-      {items.map((item, index) => (
+      {sortedAndFilteredItems.map((item, index) => (
         <ItemCard
           item={item}
           key={index}
@@ -487,11 +494,10 @@ export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: C
 
         <CardHeader
           title={item.title}
-          subheader={item.subTitle}
+          subheader={`${item.subTitle}, ${item.startDate} - ${item.endDate}`}
         />
 
         <CardContent>
-          
           <Typography
             variant="body1"
             gutterBottom
