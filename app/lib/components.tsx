@@ -210,6 +210,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
       >
         <Stack
           direction="row"
+          spacing={1}
         >
           <Icon
             fontSize="large"
@@ -219,19 +220,19 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ marginLeft: "8px" }}
           >
             {title}
           </Typography>
         
           {count != null && <Chip
             label={count}
-            sx={{ marginTop: "6px", marginLeft: "8px" }}
+            sx={{ marginTop: "6px" }}
           />}
         </Stack>
 
         <Stack
           direction="row"
+          spacing={1}
         >
           <FormControl
             size="small"
