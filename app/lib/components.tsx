@@ -213,6 +213,7 @@ export function AboutMe() {
     <Typography
       variant="body1"
       gutterBottom
+      sx={{ marginLeft: "50px", marginRight: "50px" }}
     >
       <TypeAnimation
         sequence={[
@@ -248,7 +249,9 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
   const [ message, setMessage ] = useState("");
 
   return (
-    <Card>
+    <Card
+      sx={{ marginLeft: "50px", marginRight: "50px" }}
+    >
       <CardContent>
         <TextField
           label="Your Name"
