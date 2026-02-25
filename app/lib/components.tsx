@@ -455,11 +455,15 @@ export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolea
         />
 
         <DialogContentText>
-          {item.description}
+          <Markdown>
+            {item.description}
+          </Markdown>
         </DialogContentText>
         
         <DialogContentText>
-          {item.subDescription}
+          <Markdown>
+            {item.subDescription}
+          </Markdown>
         </DialogContentText>
       </DialogContent>
 
