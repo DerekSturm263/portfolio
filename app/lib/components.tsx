@@ -199,12 +199,12 @@ export function Section({ title, id, count, icon, children }: { title: string, i
         />
 
         {` ${title}`}
+
+        <Chip
+          label={count}
+        />
       </Typography>
 
-      <Chip
-        label={count}
-      />
-      
       {Children.map(children, child => 
         <>
           {child}
