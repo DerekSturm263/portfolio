@@ -3,7 +3,7 @@
 import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
-import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -189,23 +189,62 @@ export function Section({ title, id, count, icon, children }: { title: string, i
       id={id}
       sx={{ width: "100%", margin: "auto" }}
     >
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{ marginLeft: "50px" }}
+      <Stack
+        direction="row"
+        sx={{ justifyContent: "space-between" }}
       >
-        <Icon
-          fontSize="large"
-          sx={{ marginBottom: "-5px" }}
-        />
+        <Stack
+          direction="row"
+        >
+          <Icon
+            fontSize="large"
+            sx={{ marginBottom: "-5px" }}
+          />
 
-        {` ${title}`}
+          <Typography
+            variant="h4"
+            gutterBottom
+            sx={{ marginLeft: "50px" }}
+          >
+            {title}
+          </Typography>
+        
+          {count != null && <Chip
+            label={count}
+            sx={{ marginTop: "-8px", marginLeft: "8px" }}
+          />}
+        </Stack>
 
-        {count != null && <Chip
-          label={count}
-          sx={{ marginTop: "-8px", marginLeft: "8px" }}
-        />}
-      </Typography>
+        <Stack
+          direction="row"
+        >
+          <Select
+            label="Sort"
+          >
+            {[].map((item, index) => (
+              <MenuItem
+                value={item}
+                key={index}
+              >
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+
+          <Select
+            label="Filter"
+          >
+            {[].map((item, index) => (
+              <MenuItem
+                value={item}
+                key={index}
+              >
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+        </Stack>
+      </Stack>
 
       {Children.map(children, child => 
         <>

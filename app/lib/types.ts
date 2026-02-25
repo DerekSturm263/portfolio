@@ -3,6 +3,8 @@ export interface CardItem {
   subTitle: string;
   description: string;
   subDescription: string;
+  startDate: string;
+  endDate: string;
   mediaType: "img" | "video";
   media: string;
   link: string;
