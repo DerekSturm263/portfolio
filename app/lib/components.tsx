@@ -236,7 +236,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           {allSortTags.length > 0 && <Select
             label="Sort"
             value={sortTag}
-            onChange={(e: SelectChangeEvent<typeof sortTag>) => {
+            onChange={(e) => {
 
             }}
           >
@@ -254,6 +254,15 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
             label="Filter"
             value={filterTags}
             multiple
+            onChange={(e) => {
+              const {
+                target: { value },
+              } = e;
+
+              setFilterTagsCallback(
+                typeof value === 'string' ? value.split(',') : value,
+              );
+            }}
           >
             {allFilterTags.map((item, index) => (
               <MenuItem
