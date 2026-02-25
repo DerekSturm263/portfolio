@@ -234,6 +234,7 @@ export function Skills() {
         <Chip
           key={index}
           label={item}
+          size="medium"
         />
       ))}
     </Stack>
@@ -342,7 +343,7 @@ export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items:
 export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: CardItem, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   return (
     <Card
-      sx={{ width: 300 }}
+      sx={{ width: "300px", minWidth: "300px" }}
     >
       <CardActionArea
         onClick={(e) => {
