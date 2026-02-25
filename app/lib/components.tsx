@@ -236,50 +236,54 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           <FormControl
             size="small"
           >
-          <InputLabel id="sort-label">Age</InputLabel>
+            <InputLabel id="sort-label">Sort</InputLabel>
 
-          {allSortTags.length > 0 && <Select
-            labelId="sort-label"
-            label="Sort"
-            value={sortTag}
-            onChange={(e) => setSortTagCallback(e.target.value)}
+            {allSortTags.length > 0 && <Select
+              labelId="sort-label"
+              label="Sort"
+              value={sortTag}
+              onChange={(e) => setSortTagCallback(e.target.value)}
+            >
+              {allSortTags.map((item, index) => (
+                <MenuItem
+                  value={item}
+                  key={index}
+                >
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>}
+          </FormControl>
+
+          <FormControl
+            size="small"
           >
-            {allSortTags.map((item, index) => (
-              <MenuItem
-                value={item}
-                key={index}
-              >
-                {item}
-              </MenuItem>
-            ))}
-          </Select>}
+            <InputLabel id="filter-label">Filter</InputLabel>
+            
+            {allFilterTags.length > 0 && <Select
+              labelId="filter-label"
+              label="Filter"
+              value={filterTags}
+              multiple
+              onChange={(e) => {
+                const {
+                  target: { value },
+                } = e;
 
-          <InputLabel id="filter-label">Age</InputLabel>
-
-          {allFilterTags.length > 0 && <Select
-            labelId="filter-label"
-            label="Filter"
-            value={filterTags}
-            multiple
-            onChange={(e) => {
-              const {
-                target: { value },
-              } = e;
-
-              setFilterTagsCallback(
-                typeof value === 'string' ? value.split(',') : value,
-              );
-            }}
-          >
-            {allFilterTags.map((item, index) => (
-              <MenuItem
-                value={item}
-                key={index}
-              >
-                {item}
-              </MenuItem>
-            ))}
-          </Select>}
+                setFilterTagsCallback(
+                  typeof value === 'string' ? value.split(',') : value,
+                );
+              }}
+            >
+              {allFilterTags.map((item, index) => (
+                <MenuItem
+                  value={item}
+                  key={index}
+                >
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>}
           </FormControl>
         </Stack>
       </Stack>
