@@ -54,7 +54,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
           <Section
             title={item.title}
             id={item.id}
-            count={null}
+            count={allItems[index].length}
             icon={item.icon}
             key={index}
           >
@@ -69,7 +69,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
         <Section
           title={pages.at(-1)?.title ?? ""}
           id={pages.at(-1)?.id ?? ""}
-          count={allItems.at(-1)?.length || 0}
+          count={null}
           icon={pages.at(-1)?.icon ?? CheckBoxOutlineBlank}
         >
           <ContactMe
@@ -369,6 +369,7 @@ export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: C
           component={item.mediaType}
           src={item.media == "" ? undefined : item.media}
           image={item.media}
+          height={150}
         />
 
         <CardHeader
