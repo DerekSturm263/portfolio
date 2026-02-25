@@ -35,6 +35,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
         <Section
           title={pages[0].title}
           id={pages[0].id}
+          count={allItems[0].length}
           icon={pages[0].icon}
         >
           <AboutMe />
@@ -43,6 +44,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
         <Section
           title={pages[1].title}
           id={pages[1].id}
+          count={allItems[1].length}
           icon={pages[1].icon}
         >
           <Skills />
@@ -52,6 +54,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
           <Section
             title={item.title}
             id={item.id}
+            count={allItems[index].length}
             icon={item.icon}
             key={index}
           >
@@ -66,6 +69,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
         <Section
           title={pages.at(-1)?.title ?? ""}
           id={pages.at(-1)?.id ?? ""}
+          count={allItems.at(-1)?.length || 0}
           icon={pages.at(-1)?.icon ?? CheckBoxOutlineBlank}
         >
           <ContactMe
@@ -176,7 +180,7 @@ export function Sidebar() {
   );
 }
 
-export function Section({ title, id, icon, children }: { title: string, id: string, icon: SvgIconComponent, children: React.ReactNode }) {
+export function Section({ title, id, count, icon, children }: { title: string, id: string, count: number, icon: SvgIconComponent, children: React.ReactNode }) {
   const Icon = icon;
 
   return (
@@ -196,6 +200,10 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
 
         {` ${title}`}
       </Typography>
+
+      <Chip
+        label={count}
+      />
       
       {Children.map(children, child => 
         <>
