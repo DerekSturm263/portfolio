@@ -35,7 +35,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
         <Section
           title={pages[0].title}
           id={pages[0].id}
-          count={allItems[0].length}
+          count={null}
           icon={pages[0].icon}
         >
           <AboutMe />
@@ -44,7 +44,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
         <Section
           title={pages[1].title}
           id={pages[1].id}
-          count={allItems[1].length}
+          count={22} // Todo: Fix hardcoding
           icon={pages[1].icon}
         >
           <Skills />
@@ -54,7 +54,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
           <Section
             title={item.title}
             id={item.id}
-            count={allItems[index].length}
+            count={null}
             icon={item.icon}
             key={index}
           >
@@ -180,7 +180,7 @@ export function Sidebar() {
   );
 }
 
-export function Section({ title, id, count, icon, children }: { title: string, id: string, count: number, icon: SvgIconComponent, children: React.ReactNode }) {
+export function Section({ title, id, count, icon, children }: { title: string, id: string, count: number | null, icon: SvgIconComponent, children: React.ReactNode }) {
   const Icon = icon;
 
   return (
@@ -200,9 +200,9 @@ export function Section({ title, id, count, icon, children }: { title: string, i
 
         {` ${title}`}
 
-        <Chip
+        {count != null && <Chip
           label={count}
-        />
+        />}
       </Typography>
 
       {Children.map(children, child => 
