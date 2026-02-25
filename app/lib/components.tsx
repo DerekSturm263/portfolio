@@ -231,6 +231,7 @@ export function Skills() {
   return (
     <Stack
       direction="row"
+      sx={{ marginLeft: "50px", marginRight: "50px" }}
     >
       {[ "C# Programming", "", "", "" ].map((item, index) => (
         <Chip
