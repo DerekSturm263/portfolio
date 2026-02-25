@@ -206,7 +206,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
     >
       <Stack
         direction="row"
-        sx={{ justifyContent: "space-between", marginLeft: "50px", marginRight: "50px" }}
+        sx={{ justifyContent: "space-between", marginLeft: "50px", marginRight: "50px", marginBottom: "8px" }}
       >
         <Stack
           direction="row"
@@ -282,6 +282,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
         </>
       )}
 
+      <Toolbar />
       <Toolbar />
     </Stack>
   );
