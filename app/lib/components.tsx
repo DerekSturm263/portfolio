@@ -30,7 +30,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
       />
 
       <Stack
-        sx={{ marginLeft: "300px" }}
+        sx={{ marginLeft: "269px" }}
       >
         <Section
           title={pages[0].title}
@@ -182,7 +182,7 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
   return (
     <Stack
       id={id}
-      sx={{ width: "95%", margin: "auto" }}
+      sx={{ width: "100%", margin: "auto" }}
     >
       <Typography
         variant="h4"
