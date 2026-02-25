@@ -8,7 +8,6 @@ import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIc
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { CardItem, Params, SearchParams } from "./types";
-import { Masonry } from "@mui/lab";
 
 export function Everything({ allItems, params, searchParams }: { allItems: CardItem[][], params: Params, searchParams: SearchParams }) {
   const [ isDialogOpen, setIsDialogOpen ] = useState(false);
@@ -31,7 +30,7 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
       />
 
       <Stack
-        sx={{ marginLeft: "300px" }}
+        sx={{ marginLeft: "269px" }}
       >
         <Section
           title={pages[0].title}
@@ -40,8 +39,16 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
         >
           <AboutMe />
         </Section>
+        
+        <Section
+          title={pages[1].title}
+          id={pages[1].id}
+          icon={pages[1].icon}
+        >
+          <Skills />
+        </Section>
 
-        {pages.slice(1, pages.length - 1).map((item, index) => (
+        {pages.slice(2, pages.length - 1).map((item, index) => (
           <Section
             title={item.title}
             id={item.id}
@@ -175,11 +182,12 @@ export function Section({ title, id, icon, children }: { title: string, id: stri
   return (
     <Stack
       id={id}
-      sx={{ width: "95%", margin: "auto" }}
+      sx={{ width: "100%", margin: "auto" }}
     >
       <Typography
         variant="h4"
         gutterBottom
+        sx={{ marginLeft: "50px" }}
       >
         <Icon
           fontSize="large"
@@ -205,6 +213,7 @@ export function AboutMe() {
     <Typography
       variant="body1"
       gutterBottom
+      sx={{ marginLeft: "50px", marginRight: "50px" }}
     >
       <TypeAnimation
         sequence={[
@@ -218,13 +227,33 @@ export function AboutMe() {
   );
 }
 
+export function Skills() {
+  return (
+    <Stack
+      direction="row"
+      spacing={1}
+      sx={{ marginLeft: "50px", marginRight: "50px", flexWrap: "wrap" }}
+    >
+      {[ "C#", "Java", "C", "C++", "JavaScript", "HTML", "CSS", "React", "Next.js", "Node.js", "Unity", "Visual Studio", "GitHub", "DevOps", "Vercel", "MongoDB", "Jira", "Confluence", "Project Management", "Cloud Computing", "Google Cloud", "CD/CI" ].map((item, index) => (
+        <Chip
+          key={index}
+          label={item}
+          size="medium"
+        />
+      ))}
+    </Stack>
+  );
+}
+
 export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
   const [ name, setYourName ] = useState("");
   const [ senderEmail, setSenderEmail ] = useState("");
   const [ message, setMessage ] = useState("");
 
   return (
-    <Card>
+    <Card
+      sx={{ marginLeft: "50px", marginRight: "50px" }}
+    >
       <CardContent>
         <TextField
           label="Your Name"
@@ -265,7 +294,7 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
           label="Message"
           variant="filled"
           fullWidth
-          rows={6}
+          rows={8}
           multiline
           onChange={(e) => setMessage(e.target.value)}
           value={message}
@@ -291,7 +320,7 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
           startIcon={<Send />}
           fullWidth
         >
-          Send
+          Send Email
         </Button>
       </CardActions>
     </Card>
@@ -300,10 +329,10 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
 
 export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items: CardItem[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   return (
-    <Masonry
-      columns={3}
+    <Stack
+      direction="row"
       spacing={4}
-      sequential
+      sx={{ overflowX: "scroll", scrollbarWidth: "none", paddingLeft: "50px", paddingRight: "50px" }}
     >
       {items.map((item, index) => (
         <ItemCard
@@ -313,14 +342,14 @@ export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items:
           setItemCallback={setItemCallback}
         />
       ))}
-    </Masonry>
+    </Stack>
   );
 }
 
 export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: CardItem, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   return (
     <Card
-      sx={{ width: 300 }}
+      sx={{ width: "350px", minWidth: "350px" }}
     >
       <CardActionArea
         onClick={(e) => {
