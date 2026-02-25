@@ -291,7 +291,7 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
           startIcon={<Send />}
           fullWidth
         >
-          Send
+          Send Email
         </Button>
       </CardActions>
     </Card>
