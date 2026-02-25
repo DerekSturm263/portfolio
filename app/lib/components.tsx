@@ -236,11 +236,11 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           <FormControl
             size="small"
           >
-            <InputLabel id="sort-label">Sort</InputLabel>
+            <InputLabel id="sort-label">Sort By</InputLabel>
 
             {allSortTags.length > 0 && <Select
               labelId="sort-label"
-              label="Sort"
+              label="Sort By"
               value={sortTag}
               onChange={(e) => setSortTagCallback(e.target.value)}
             >
@@ -258,11 +258,11 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           <FormControl
             size="small"
           >
-            <InputLabel id="filter-label">Filter</InputLabel>
+            <InputLabel id="filter-label">Filter In</InputLabel>
             
             {allFilterTags.length > 0 && <Select
               labelId="filter-label"
-              label="Filter"
+              label="Filter In"
               value={filterTags}
               multiple
               onChange={(e) => {
