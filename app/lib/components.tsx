@@ -288,7 +288,7 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
           label="Message"
           variant="filled"
           fullWidth
-          rows={6}
+          rows={8}
           multiline
           onChange={(e) => setMessage(e.target.value)}
           value={message}
