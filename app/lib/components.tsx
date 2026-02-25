@@ -206,7 +206,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
     >
       <Stack
         direction="row"
-        sx={{ justifyContent: "space-between" }}
+        sx={{ justifyContent: "space-between", marginLeft: "50px", marginRight: "50px" }}
       >
         <Stack
           direction="row"
@@ -219,7 +219,6 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ marginLeft: "50px" }}
           >
             {title}
           </Typography>
