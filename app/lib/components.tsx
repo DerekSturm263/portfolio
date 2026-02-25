@@ -456,7 +456,9 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
 }
 
 export function ItemList({ items, sortTag, filterTags, setIsOpenCallback, setItemCallback }: { items: CardItem[], sortTag: keyof CardItem, filterTags: string[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
-  const sortedAndFilteredItems = items.filter(item => filterTags.includes(item.type)).sort((a, b) => a[sortTag].toString().localeCompare(b[sortTag].toString()));
+  const sortedAndFilteredItems = items
+    .filter(item => filterTags.includes(item.type))
+    .sort((a, b) => (a[sortTag] ?? "").toString().localeCompare((b[sortTag] ?? "").toString()));
 
   return (
     <Stack
