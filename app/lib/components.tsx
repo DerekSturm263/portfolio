@@ -3,7 +3,7 @@
 import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
-import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, FormControl, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -233,10 +233,15 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
         <Stack
           direction="row"
         >
+          <FormControl
+            size="small"
+          >
+          <InputLabel id="sort-label">Age</InputLabel>
+
           {allSortTags.length > 0 && <Select
+            labelId="sort-label"
             label="Sort"
             value={sortTag}
-            size="small"
             onChange={(e) => setSortTagCallback(e.target.value)}
           >
             {allSortTags.map((item, index) => (
@@ -249,11 +254,13 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
             ))}
           </Select>}
 
+          <InputLabel id="filter-label">Age</InputLabel>
+
           {allFilterTags.length > 0 && <Select
+            labelId="filter-label"
             label="Filter"
             value={filterTags}
             multiple
-            size="small"
             onChange={(e) => {
               const {
                 target: { value },
@@ -273,6 +280,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
               </MenuItem>
             ))}
           </Select>}
+          </FormControl>
         </Stack>
       </Stack>
 
