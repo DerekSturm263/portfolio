@@ -231,8 +231,8 @@ export function Skills() {
   return (
     <Stack
       direction="row"
-      spacing={2}
-      sx={{ marginLeft: "50px", marginRight: "50px" }}
+      spacing={1}
+      sx={{ marginLeft: "50px", marginRight: "50px", flexWrap: "wrap" }}
     >
       {[ "C#", "Java", "C", "C++", "JavaScript", "HTML", "CSS", "React", "Next.js", "Node.js", "Unity", "Visual Studio", "GitHub", "DevOps", "Vercel", "MongoDB", "Jira", "Confluence", "Project Management", "Cloud Computing", "Google Cloud", "CD/CI" ].map((item, index) => (
         <Chip
