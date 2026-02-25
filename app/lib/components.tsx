@@ -40,8 +40,16 @@ export function Everything({ allItems, params, searchParams }: { allItems: CardI
         >
           <AboutMe />
         </Section>
+        
+        <Section
+          title={pages[1].title}
+          id={pages[1].id}
+          icon={pages[1].icon}
+        >
+          <AboutMe />
+        </Section>
 
-        {pages.slice(1, pages.length - 1).map((item, index) => (
+        {pages.slice(2, pages.length - 1).map((item, index) => (
           <Section
             title={item.title}
             id={item.id}
@@ -218,6 +226,18 @@ export function AboutMe() {
   );
 }
 
+export function Skills() {
+  return (
+    <Stack
+      direction="row"
+    >
+      <Chip>
+
+      </Chip>
+    </Stack>
+  );
+}
+
 export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
   const [ name, setYourName ] = useState("");
   const [ senderEmail, setSenderEmail ] = useState("");
@@ -300,10 +320,10 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
 
 export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items: CardItem[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   return (
-    <Masonry
-      columns={3}
+    <Stack
+      direction="row"
       spacing={4}
-      sequential
+      sx={{ overflowX: "auto", scrollbarWidth: "none" }}
     >
       {items.map((item, index) => (
         <ItemCard
@@ -313,7 +333,7 @@ export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items:
           setItemCallback={setItemCallback}
         />
       ))}
-    </Masonry>
+    </Stack>
   );
 }
 
