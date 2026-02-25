@@ -3,7 +3,7 @@
 import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
-import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -38,8 +38,12 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           id={pages[0].id}
           count={null}
           icon={pages[0].icon}
-          sortTags={[]}
+          allSortTags={[]}
+          allFilterTags={[]}
+          sortTag=""
           filterTags={[]}
+          setSortTagCallback={() => {}}
+          setFilterTagsCallback={() => {}}
         >
           <AboutMe />
         </Section>
@@ -49,8 +53,12 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           id={pages[1].id}
           count={22} // Todo: Fix hardcoding
           icon={pages[1].icon}
-          sortTags={[]}
+          allSortTags={[]}
+          allFilterTags={[]}
+          sortTag=""
           filterTags={[]}
+          setSortTagCallback={() => {}}
+          setFilterTagsCallback={() => {}}
         >
           <Skills />
         </Section>
@@ -73,8 +81,12 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           id={pages.at(-1)?.id ?? ""}
           count={null}
           icon={pages.at(-1)?.icon ?? CheckBoxOutlineBlank}
-          sortTags={[]}
+          allSortTags={[]}
+          allFilterTags={[]}
+          sortTag=""
           filterTags={[]}
+          setSortTagCallback={() => {}}
+          setFilterTagsCallback={() => {}}
         >
           <ContactMe
             setIsOpenCallback={setIsSnackbarOpen}
@@ -184,7 +196,7 @@ export function Sidebar() {
   );
 }
 
-export function Section({ title, id, count, icon, sortTags, filterTags, children }: { title: string, id: string, count: number | null, icon: SvgIconComponent, sortTags: string[], filterTags: string[], children: React.ReactNode }) {
+export function Section({ title, id, count, icon, allSortTags, allFilterTags, sortTag, filterTags, setSortTagCallback, setFilterTagsCallback, children }: { title: string, id: string, count: number | null, icon: SvgIconComponent, allSortTags: string[], allFilterTags: string[], sortTag: string, filterTags: string[], setSortTagCallback: Dispatch<SetStateAction<string>>, setFilterTagsCallback: Dispatch<SetStateAction<string[]>>, children: React.ReactNode }) {
   const Icon = icon;
 
   return (
@@ -221,23 +233,14 @@ export function Section({ title, id, count, icon, sortTags, filterTags, children
         <Stack
           direction="row"
         >
-          <Select
+          {allSortTags.length > 0 && <Select
             label="Sort"
-          >
-            {sortTags.map((item, index) => (
-              <MenuItem
-                value={item}
-                key={index}
-              >
-                {item}
-              </MenuItem>
-            ))}
-          </Select>
+            value={sortTag}
+            onChange={(e: SelectChangeEvent<typeof sortTag>) => {
 
-          <Select
-            label="Filter"
+            }}
           >
-            {filterTags.map((item, index) => (
+            {allSortTags.map((item, index) => (
               <MenuItem
                 value={item}
                 key={index}
@@ -245,7 +248,22 @@ export function Section({ title, id, count, icon, sortTags, filterTags, children
                 {item}
               </MenuItem>
             ))}
-          </Select>
+          </Select>}
+
+          {allFilterTags.length > 0 && <Select
+            label="Filter"
+            value={filterTags}
+            multiple
+          >
+            {allFilterTags.map((item, index) => (
+              <MenuItem
+                value={item}
+                key={index}
+              >
+                {item}
+              </MenuItem>
+            ))}
+          </Select>}
         </Stack>
       </Stack>
 
@@ -299,7 +317,7 @@ export function Skills() {
 
 export function ItemListWithHeader({ allItems, index, title, id, icon, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   const [ sortTag, setSortTag ] = useState("startDate");
-  const [ filterTags, setFilterTags ] = useState([]);
+  const [ filterTags, setFilterTags ] = useState<string[]>([]);
 
   return (
     <Section
@@ -307,8 +325,12 @@ export function ItemListWithHeader({ allItems, index, title, id, icon, setIsOpen
       id={id}
       count={allItems[index].length}
       icon={icon}
-      sortTags={[ "startDate", "endDate", "title", "subTitle" ]}
-      filterTags={[ "Test 3", "Test 4" ]}
+      allSortTags={[ "startDate", "endDate", "title", "subTitle" ]}
+      allFilterTags={[ "Test 3", "Test 4" ]}
+      sortTag={sortTag}
+      filterTags={filterTags}
+      setSortTagCallback={setSortTag}
+      setFilterTagsCallback={setFilterTags}
     >
       <ItemList
         items={allItems[index]}
