@@ -213,19 +213,19 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
         >
           <Icon
             fontSize="large"
-            sx={{ marginBottom: "-5px" }}
+            sx={{ marginTop: "5px" }}
           />
 
           <Typography
             variant="h4"
             gutterBottom
           >
-            {title}
+            {` ${title}`}
           </Typography>
         
           {count != null && <Chip
             label={count}
-            sx={{ marginTop: "-8px", marginLeft: "8px" }}
+            sx={{ marginTop: "5px", marginLeft: "8px" }}
           />}
         </Stack>
 
