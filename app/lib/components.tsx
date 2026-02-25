@@ -343,7 +343,7 @@ export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items:
 export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: CardItem, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   return (
     <Card
-      sx={{ width: "300px", minWidth: "300px" }}
+      sx={{ width: "350px", minWidth: "350px" }}
     >
       <CardActionArea
         onClick={(e) => {
