@@ -328,6 +328,11 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
               labelId="filter-label"
               label="Filter In"
               value={filterTags}
+              renderValue={(selected) => (
+                selected.length == 0 ? "None" :
+                selected.length == allFilterTags.length ? "All" :
+                "Mixed"
+              )}
               multiple
               onChange={(e) => {
                 const {
