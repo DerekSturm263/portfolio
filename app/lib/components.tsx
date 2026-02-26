@@ -212,11 +212,15 @@ export function ItemListWithHeader({ allItems, index, title, id, icon, allSortTa
   const [ sortDirection, setSortDirection ] = useState(SortDirection.Descending);
   const [ filterTags, setFilterTags ] = useState(allFilterTags);
 
+  const sortedAndFilteredItems = allItems[index]
+    .filter(item => filterTags.includes(item.type))
+    .sort((a, b) => (a[sortTag] ?? "").toString().localeCompare((b[sortTag] ?? "").toString()) * sortDirection);
+
   return (
     <Section
       title={title}
       id={id}
-      count={allItems[index].length}
+      count={sortedAndFilteredItems.length}
       icon={icon}
       allSortTags={allSortTags}
       allFilterTags={allFilterTags}
@@ -228,10 +232,7 @@ export function ItemListWithHeader({ allItems, index, title, id, icon, allSortTa
       setFilterTagsCallback={setFilterTags}
     >
       <ItemList
-        items={allItems[index]}
-        sortTag={sortTag}
-        sortDirection={sortDirection}
-        filterTags={filterTags}
+        items={sortedAndFilteredItems}
         setIsOpenCallback={setIsOpenCallback}
         setItemCallback={setItemCallback}
       />
@@ -500,18 +501,14 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
   )
 }
 
-export function ItemList({ items, sortTag, sortDirection, filterTags, setIsOpenCallback, setItemCallback }: { items: CardItem[], sortTag: keyof CardItem, sortDirection: SortDirection, filterTags: string[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
-  const sortedAndFilteredItems = items
-    .filter(item => filterTags.includes(item.type))
-    .sort((a, b) => (a[sortTag] ?? "").toString().localeCompare((b[sortTag] ?? "").toString()) * sortDirection);
-
+export function ItemList({ items, setIsOpenCallback, setItemCallback }: { items: CardItem[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   return (
     <Stack
       direction="row"
       spacing={4}
       sx={{ overflowX: "scroll", scrollbarWidth: "none", paddingLeft: "50px", paddingRight: "50px" }}
     >
-      {sortedAndFilteredItems.map((item, index) => (
+      {items.map((item, index) => (
         <ItemCard
           item={item}
           key={index}
