@@ -1,9 +1,8 @@
 export interface CardItem {
   type: string;
   title: string;
-  subTitle: string;
+  company: string;
   description: string;
-  subDescription: string;
   startDate: string;
   endDate: string;
   mediaType: "img" | "video";

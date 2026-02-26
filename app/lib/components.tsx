@@ -15,7 +15,7 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
   const [ dialogItem, setDialogItem ] = useState({} as CardItem);
   const [ isSnackbarOpen, setIsSnackbarOpen ] = useState(false);
 
-  const allSortTags: (keyof CardItem)[] = [ "startDate", "endDate", "title", "subTitle" ];
+  const allSortTags = Object.keys({} as CardItem) as (keyof CardItem)[];
 
   return (
     <>
@@ -543,7 +543,7 @@ export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: C
 
         <CardHeader
           title={item.title}
-          subheader={`${item.subTitle}, ${item.startDate} - ${item.endDate}`}
+          subheader={`${item.company}, ${item.startDate} - ${item.endDate}`}
         />
 
         <CardContent>
@@ -553,15 +553,6 @@ export function ItemCard({ item, setIsOpenCallback, setItemCallback }: { item: C
           >
             <Markdown>
               {item.description}
-            </Markdown>
-          </Typography>
-
-          <Typography
-            variant="body2"
-            sx={{ marginTop: "8px" }}
-          >
-            <Markdown>
-              {item.subDescription}
             </Markdown>
           </Typography>
         </CardContent>
@@ -611,7 +602,7 @@ export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolea
       </DialogTitle>
 
       <DialogTitle>
-        {item.subTitle}
+        {item.company}
       </DialogTitle>
 
       <DialogContent>
@@ -623,12 +614,6 @@ export function ItemDialog({ isOpen, setIsOpenCallback, item }: { isOpen: boolea
         <DialogContentText>
           <Markdown>
             {item.description}
-          </Markdown>
-        </DialogContentText>
-        
-        <DialogContentText>
-          <Markdown>
-            {item.subDescription}
           </Markdown>
         </DialogContentText>
       </DialogContent>
