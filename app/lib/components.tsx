@@ -206,7 +206,7 @@ export function Sidebar() {
 }
 
 export function ItemListWithHeader({ allItems, index, title, id, icon, allSortTags, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
-  const allFilterTags = allItems[index].map(item => item.type);
+  const allFilterTags = [ ... new Set(allItems[index].map(item => item.type)) ];
   
   const [ sortTag, setSortTag ] = useState(allSortTags[0]);
   const [ sortDirection, setSortDirection ] = useState(SortDirection.Descending);
