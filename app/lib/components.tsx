@@ -313,6 +313,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
           label="Sort By"
           value={sortTag}
           onChange={(e) => setSortTagCallback(e.target.value)}
+          sx={{ width: "200px" }}
         >
           {allSortTags.map((item, index) => (
             <MenuItem
@@ -332,6 +333,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
           label=""
           value={SortDirection[sortDirection]}
           onChange={(e) => setSortDirectionCallback(SortDirection[e.target.value as keyof typeof SortDirection])}
+          sx={{ width: "200px" }}
         >
           {Object.values(SortDirection).filter(value => typeof value === "string").map((item, index) => (
             <MenuItem
@@ -368,6 +370,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
 
             setFilterTagsCallback(typeof value === 'string' ? value.split(',') : value);
           }}
+          sx={{ width: "200px" }}
         >
           {allFilterTags.map((item, index) => {
             const selected = filterTags.includes(item);
