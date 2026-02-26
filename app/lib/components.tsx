@@ -355,8 +355,9 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
           label="Filter In"
           input={<OutlinedInput label="Filter In" />}
           value={filterTags}
+          displayEmpty
           renderValue={(selected) => (
-            !selected || selected.length == 0 ? "None" :
+            selected.length == 0 ? "None" :
             selected.length == 1 ? selected[0] :
             selected.length == allFilterTags.length ? "All" :
             "Mixed"
