@@ -15,8 +15,6 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
   const [ dialogItem, setDialogItem ] = useState({} as CardItem);
   const [ isSnackbarOpen, setIsSnackbarOpen ] = useState(false);
 
-  const allSortTags = Object.keys({} as CardItem) as (keyof CardItem)[];
-
   return (
     <>
       <ItemDialog
@@ -76,7 +74,6 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
             title={item.title}
             id={item.id}
             icon={item.icon}
-            allSortTags={allSortTags}
             setIsOpenCallback={setIsDialogOpen}
             setItemCallback={setDialogItem}
             key={index}
@@ -205,7 +202,8 @@ export function Sidebar() {
   );
 }
 
-export function ItemListWithHeader({ allItems, index, title, id, icon, allSortTags, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+export function ItemListWithHeader({ allItems, index, title, id, icon, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+  const allSortTags = Object.keys(allItems[index]) as (keyof CardItem)[];
   const allFilterTags = [ ... new Set(allItems[index].map(item => item.type)) ];
   
   const [ sortTag, setSortTag ] = useState(allSortTags[0]);
@@ -301,101 +299,99 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
 
 export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirection, filterTags, setSortTagCallback, setSortDirectionCallback, setFilterTagsCallback }: { allSortTags: (keyof CardItem)[], allFilterTags: string[], sortTag: keyof CardItem, sortDirection: SortDirection, filterTags: string[], setSortTagCallback: Dispatch<SetStateAction<keyof CardItem>>, setSortDirectionCallback: Dispatch<SetStateAction<SortDirection>>, setFilterTagsCallback: Dispatch<SetStateAction<string[]>> }) {
   return (
-        <Stack
-          direction="row"
-          spacing={1}
+    <Stack
+      direction="row"
+      spacing={1}
+    >
+      <FormControl
+        size="small"
+      >
+        <InputLabel id="sort-label">Sort By</InputLabel>
+
+        {allSortTags.length > 0 && <Select
+          labelId="sort-label"
+          label="Sort By"
+          value={sortTag}
+          onChange={(e) => setSortTagCallback(e.target.value)}
         >
-          <FormControl
-            size="small"
-          >
-            <InputLabel id="sort-label">Sort By</InputLabel>
-
-            {allSortTags.length > 0 && <Select
-              labelId="sort-label"
-              label="Sort By"
-              value={sortTag}
-              onChange={(e) => setSortTagCallback(e.target.value)}
+          {allSortTags.map((item, index) => (
+            <MenuItem
+              value={item}
+              key={index}
             >
-              {allSortTags.map((item, index) => (
-                <MenuItem
-                  value={item}
-                  key={index}
-                >
-                  {item}
-                </MenuItem>
-              ))}
-            </Select>}
-          </FormControl>
+              {item}
+            </MenuItem>
+          ))}
+        </Select>}
+      </FormControl>
 
-          <FormControl
-            size="small"
-          >
-            {allSortTags.length > 0 && <Select
-              label=""
-              value={SortDirection[sortDirection]}
-              onChange={(e) => setSortDirectionCallback(SortDirection[e.target.value as keyof typeof SortDirection])}
+      <FormControl
+        size="small"
+      >
+        {allSortTags.length > 0 && <Select
+          label=""
+          value={SortDirection[sortDirection]}
+          onChange={(e) => setSortDirectionCallback(SortDirection[e.target.value as keyof typeof SortDirection])}
+        >
+          {Object.values(SortDirection).filter(value => typeof value === "string").map((item, index) => (
+            <MenuItem
+              value={item}
+              key={index}
             >
-              {Object.values(SortDirection).filter(value => typeof value === "string").map((item, index) => (
-                <MenuItem
-                  value={item}
-                  key={index}
-                >
-                  {item}
-                </MenuItem>
-              ))}
-            </Select>}
-          </FormControl>
+              {item}
+            </MenuItem>
+          ))}
+        </Select>}
+      </FormControl>
 
-          <FormControl
-            size="small"
-          >
-            <InputLabel id="filter-label">Filter In</InputLabel>
+      <FormControl
+        size="small"
+      >
+        <InputLabel id="filter-label">Filter In</InputLabel>
             
-            {allFilterTags.length > 0 && <Select
-              labelId="filter-label"
-              label="Filter In"
-              input={<OutlinedInput label="Filter In" />}
-              value={filterTags}
-              renderValue={(selected) => (
-                selected.length == 0 ? "None" :
-                selected.length == 1 ? selected[0] :
-                selected.length == allFilterTags.length ? "All" :
-                "Mixed"
-              )}
-              multiple
-              onChange={(e) => {
-                const {
-                  target: { value },
-                } = e;
+        {allFilterTags.length > 0 && <Select
+          labelId="filter-label"
+          label="Filter In"
+          input={<OutlinedInput label="Filter In" />}
+          value={filterTags}
+          renderValue={(selected) => (
+            selected.length == 0 ? "None" :
+            selected.length == 1 ? selected[0] :
+            selected.length == allFilterTags.length ? "All" :
+            "Mixed"
+          )}
+          multiple
+          onChange={(e) => {
+            const {
+              target: { value },
+            } = e;
 
-                setFilterTagsCallback(
-                  typeof value === 'string' ? value.split(',') : value,
-                );
-              }}
-            >
-              {allFilterTags.map((item, index) => {
-                const selected = filterTags.includes(item);
-                const SelectionIcon = selected ? CheckBox : CheckBoxOutlineBlank;
+            setFilterTagsCallback(typeof value === 'string' ? value.split(',') : value);
+          }}
+        >
+          {allFilterTags.map((item, index) => {
+            const selected = filterTags.includes(item);
+            const SelectionIcon = selected ? CheckBox : CheckBoxOutlineBlank;
 
-                return (
-                  <MenuItem
-                    value={item}
-                    key={index}
-                  >
-                    <SelectionIcon
-                      fontSize="small"
-                      style={{ marginRight: 8, padding: 9, boxSizing: 'content-box' }}
-                    />
+            return (
+              <MenuItem
+                value={item}
+                key={index}
+              >
+                <SelectionIcon
+                  fontSize="small"
+                  style={{ marginRight: 8, padding: 9, boxSizing: 'content-box' }}
+                />
 
-                    <ListItemText
-                      primary={item}
-                    />
-                  </MenuItem>
-                );
-              })}
-            </Select>}
-          </FormControl>
-        </Stack>
+                <ListItemText
+                  primary={item}
+                />
+              </MenuItem>
+            );
+          })}
+        </Select>}
+      </FormControl>
+    </Stack>
   );
 }
 
