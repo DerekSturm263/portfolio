@@ -310,7 +310,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
               value={sortDirection}
               onChange={(e) => setSortDirectionCallback(e.target.value)}
             >
-              {Object.keys(SortDirection).map((item, index) => (
+              {Object.values(SortDirection).filter(value => typeof value === "string").map((item, index) => (
                 <MenuItem
                   value={item}
                   key={index}
