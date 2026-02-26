@@ -5,7 +5,7 @@ import sendEmail from "./email";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, FormControl, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
-import { AccountCircle, AlternateEmail, ArrowDropUp, CheckBox, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
+import { AccountCircle, AlternateEmail, CheckBox, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { CardItem, SortDirection } from "./types";
@@ -343,12 +343,6 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
               value={item}
               key={index}
             >
-              <ListItemIcon>
-                <ArrowDropUp
-                  fontSize="small"
-                />
-              </ListItemIcon>
-
               {item}
             </MenuItem>
           ))}
