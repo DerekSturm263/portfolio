@@ -332,7 +332,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
         {allSortTags.length > 0 && <Select
           value={SortDirection[sortDirection]}
           onChange={(e) => setSortDirectionCallback(SortDirection[e.target.value as keyof typeof SortDirection])}
-          sx={{ width: "150px" }}
+          sx={{ width: "130px" }}
         >
           {Object.values(SortDirection).filter(value => typeof value === "string").map((item, index) => (
             <MenuItem
