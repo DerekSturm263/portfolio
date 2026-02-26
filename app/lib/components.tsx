@@ -306,7 +306,11 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
       <FormControl
         size="small"
       >
-        <InputLabel id="sort-label">Sort By</InputLabel>
+        <InputLabel
+          id="sort-label"
+        >
+          Sort By
+        </InputLabel>
 
         {allSortTags.length > 0 && <Select
           labelId="sort-label"
@@ -348,7 +352,12 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
       <FormControl
         size="small"
       >
-        <InputLabel id="filter-label">Filter In</InputLabel>
+        <InputLabel
+          id="filter-label"
+          shrink={true}
+        >
+          Filter In
+        </InputLabel>
             
         {allFilterTags.length > 0 && <Select
           labelId="filter-label"
@@ -371,7 +380,6 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
             setFilterTagsCallback(typeof value === 'string' ? value.split(',') : value);
           }}
           sx={{ width: "150px" }}
-          inputProps={{ 'shrink': 'true' }}
         >
           {allFilterTags.map((item, index) => {
             const selected = filterTags.includes(item);
