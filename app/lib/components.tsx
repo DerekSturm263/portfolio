@@ -3,7 +3,7 @@
 import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
-import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, FormControl, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Checkbox, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, FormControl, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -339,14 +339,26 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
                 );
               }}
             >
-              {allFilterTags.map((item, index) => (
-                <MenuItem
-                  value={item}
-                  key={index}
-                >
-                  {item}
-                </MenuItem>
-              ))}
+              {allFilterTags.map((item, index) => {
+                const selected = filterTags.includes(item);
+                const SelectionIcon = selected ? Checkbox : CheckBoxOutlineBlank;
+
+                return (
+                  <MenuItem
+                    value={item}
+                    key={index}
+                  >
+                    <SelectionIcon
+                      fontSize="small"
+                      style={{ marginRight: 8, padding: 9, boxSizing: 'content-box' }}
+                    />
+
+                    <ListItemText
+                      primary={item}
+                    />
+                  </MenuItem>
+                );
+              })}
             </Select>}
           </FormControl>
         </Stack>
