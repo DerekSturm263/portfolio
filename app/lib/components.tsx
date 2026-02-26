@@ -313,7 +313,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
           label="Sort By"
           value={sortTag}
           onChange={(e) => setSortTagCallback(e.target.value)}
-          sx={{ width: "150px" }}
+          sx={{ width: "130px" }}
         >
           {allSortTags.map((item, index) => (
             <MenuItem
