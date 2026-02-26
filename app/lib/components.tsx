@@ -371,7 +371,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
             setFilterTagsCallback(typeof value === 'string' ? value.split(',') : value);
           }}
           sx={{ width: "150px" }}
-          inputProps={{ 'aria-label': 'Shrunk label' }}
+          inputProps={{ 'shrink': 'true' }}
         >
           {allFilterTags.map((item, index) => {
             const selected = filterTags.includes(item);
