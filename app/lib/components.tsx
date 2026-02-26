@@ -275,6 +275,32 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           />}
         </Stack>
 
+        <SortAndFilter
+          allSortTags={allSortTags}
+          allFilterTags={allFilterTags}
+          sortTag={sortTag}
+          sortDirection={sortDirection}
+          filterTags={filterTags}
+          setSortTagCallback={setSortTagCallback}
+          setSortDirectionCallback={setSortDirectionCallback}
+          setFilterTagsCallback={setFilterTagsCallback}
+        />
+      </Stack>
+
+      {Children.map(children, child => 
+        <>
+          {child}
+        </>
+      )}
+
+      <Toolbar />
+      <Toolbar />
+    </Stack>
+  );
+}
+
+export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirection, filterTags, setSortTagCallback, setSortDirectionCallback, setFilterTagsCallback }: { allSortTags: (keyof CardItem)[], allFilterTags: string[], sortTag: keyof CardItem, sortDirection: SortDirection, filterTags: string[], setSortTagCallback: Dispatch<SetStateAction<keyof CardItem>>, setSortDirectionCallback: Dispatch<SetStateAction<SortDirection>>, setFilterTagsCallback: Dispatch<SetStateAction<string[]>> }) {
+  return (
         <Stack
           direction="row"
           spacing={1}
@@ -368,17 +394,6 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
             </Select>}
           </FormControl>
         </Stack>
-      </Stack>
-
-      {Children.map(children, child => 
-        <>
-          {child}
-        </>
-      )}
-
-      <Toolbar />
-      <Toolbar />
-    </Stack>
   );
 }
 
