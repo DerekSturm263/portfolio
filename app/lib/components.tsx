@@ -255,7 +255,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
       >
         <Stack
           direction="row"
-          spacing={1}
+          spacing={2}
         >
           <Icon
             fontSize="large"
@@ -265,6 +265,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           <Typography
             variant="h4"
             gutterBottom
+            sx={{ marginTop: "-4px" }}
           >
             {title}
           </Typography>
