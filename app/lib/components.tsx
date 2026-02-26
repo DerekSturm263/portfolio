@@ -265,7 +265,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ marginTop: "-4px" }}
+            sx={{ marginTop: "-5px" }}
           >
             {title}
           </Typography>
@@ -307,8 +307,8 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
           >
             {allSortTags.length > 0 && <Select
               label=""
-              value={sortDirection}
-              onChange={(e) => setSortDirectionCallback(e.target.value)}
+              value={SortDirection[sortDirection]}
+              onChange={(e) => setSortDirectionCallback(SortDirection[e.target.value as keyof typeof SortDirection])}
             >
               {Object.values(SortDirection).filter(value => typeof value === "string").map((item, index) => (
                 <MenuItem
