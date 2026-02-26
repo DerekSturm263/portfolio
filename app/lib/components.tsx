@@ -206,7 +206,7 @@ export function ItemListWithHeader({ allItems, index, title, id, icon, setIsOpen
   const allSortTags = Object.keys(allItems[index][0]) as (keyof CardItem)[];
   const allFilterTags = [ ... new Set(allItems[index].map(item => item.type)) ];
   
-  const [ sortTag, setSortTag ] = useState(allSortTags[0]);
+  const [ sortTag, setSortTag ] = useState("startDate" as keyof CardItem);
   const [ sortDirection, setSortDirection ] = useState(SortDirection.Descending);
   const [ filterTags, setFilterTags ] = useState(allFilterTags);
 
