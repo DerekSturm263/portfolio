@@ -3,12 +3,12 @@
 import pages from "./pages";
 import sendEmail from "./email";
 import Link from "next/link";
+import Markdown from "react-markdown";
 import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, FormControl, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Snackbar, Stack, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { AccountCircle, AlternateEmail, CheckBox, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { CardItem, SortDirection } from "./types";
-import Markdown from "react-markdown";
 
 export function Everything({ allItems }: { allItems: CardItem[][] }) {
   const [ isDialogOpen, setIsDialogOpen ] = useState(false);
@@ -313,7 +313,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
           label="Sort By"
           value={sortTag}
           onChange={(e) => setSortTagCallback(e.target.value)}
-          sx={{ width: "100px" }}
+          sx={{ width: "150px" }}
         >
           {allSortTags.map((item, index) => (
             <MenuItem
@@ -332,7 +332,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
         {allSortTags.length > 0 && <Select
           value={SortDirection[sortDirection]}
           onChange={(e) => setSortDirectionCallback(SortDirection[e.target.value as keyof typeof SortDirection])}
-          sx={{ width: "100px" }}
+          sx={{ width: "150px" }}
         >
           {Object.values(SortDirection).filter(value => typeof value === "string").map((item, index) => (
             <MenuItem
@@ -369,7 +369,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
 
             setFilterTagsCallback(typeof value === 'string' ? value.split(',') : value);
           }}
-          sx={{ width: "100px" }}
+          sx={{ width: "150px" }}
         >
           {allFilterTags.map((item, index) => {
             const selected = filterTags.includes(item);
