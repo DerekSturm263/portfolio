@@ -17,6 +17,11 @@ export interface TagGroup {
   tags: string[];
 }
 
+export enum SortDirection {
+  "Ascending" = 1,
+  "Descending" = -1
+}
+
 export type Slug = Promise<{ slug: string }>;
 export type URLParams = Promise<{ [key: string]: string | string[] | undefined }>;
 export type Properties = { slug: Slug, urlParams: URLParams }

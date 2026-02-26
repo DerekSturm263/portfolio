@@ -7,7 +7,7 @@ import { AppBar, Avatar, Button, Card, CardActionArea, CardActions, CardContent,
 import { AccountCircle, AlternateEmail, CheckBoxOutlineBlank, Notes, Send, SvgIconComponent } from "@mui/icons-material";
 import { Children, Dispatch, SetStateAction, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
-import { CardItem } from "./types";
+import { CardItem, SortDirection } from "./types";
 import Markdown from "react-markdown";
 
 export function Everything({ allItems }: { allItems: CardItem[][] }) {
@@ -43,8 +43,10 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           allSortTags={[]}
           allFilterTags={[]}
           sortTag="startDate"
+          sortDirection={SortDirection.Descending}
           filterTags={[]}
           setSortTagCallback={() => {}}
+          setSortDirectionCallback={() => {}}
           setFilterTagsCallback={() => {}}
         >
           <AboutMe />
@@ -58,8 +60,10 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           allSortTags={[]}
           allFilterTags={[]}
           sortTag="startDate"
+          sortDirection={SortDirection.Descending}
           filterTags={[]}
           setSortTagCallback={() => {}}
+          setSortDirectionCallback={() => {}}
           setFilterTagsCallback={() => {}}
         >
           <Skills />
@@ -87,8 +91,10 @@ export function Everything({ allItems }: { allItems: CardItem[][] }) {
           allSortTags={[]}
           allFilterTags={[]}
           sortTag="startDate"
+          sortDirection={SortDirection.Descending}
           filterTags={[]}
           setSortTagCallback={() => {}}
+          setSortDirectionCallback={() => {}}
           setFilterTagsCallback={() => {}}
         >
           <ContactMe
@@ -199,7 +205,43 @@ export function Sidebar() {
   );
 }
 
-export function Section({ title, id, count, icon, allSortTags, allFilterTags, sortTag, filterTags, setSortTagCallback, setFilterTagsCallback, children }: { title: string, id: string, count: number | null, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], allFilterTags: string[], sortTag: keyof CardItem, filterTags: string[], setSortTagCallback: Dispatch<SetStateAction<keyof CardItem>>, setFilterTagsCallback: Dispatch<SetStateAction<string[]>>, children: React.ReactNode }) {
+export function ItemListWithHeader({ allItems, index, title, id, icon, allSortTags, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+  const allFilterTags: string[] = Array.from(
+    new Set(allItems.flatMap(group => group.map(item => item.type)))
+  );
+  
+  const [ sortTag, setSortTag ] = useState(allSortTags[0]);
+  const [ sortDirection, setSortDirection ] = useState(SortDirection.Descending);
+  const [ filterTags, setFilterTags ] = useState(allFilterTags);
+
+  return (
+    <Section
+      title={title}
+      id={id}
+      count={allItems[index].length}
+      icon={icon}
+      allSortTags={allSortTags}
+      allFilterTags={allFilterTags}
+      sortTag={sortTag}
+      sortDirection={sortDirection}
+      filterTags={filterTags}
+      setSortTagCallback={setSortTag}
+      setSortDirectionCallback={setSortDirection}
+      setFilterTagsCallback={setFilterTags}
+    >
+      <ItemList
+        items={allItems[index]}
+        sortTag={sortTag}
+        sortDirection={sortDirection}
+        filterTags={filterTags}
+        setIsOpenCallback={setIsOpenCallback}
+        setItemCallback={setItemCallback}
+      />
+    </Section>
+  );
+}
+
+export function Section({ title, id, count, icon, allSortTags, allFilterTags, sortTag, sortDirection, filterTags, setSortTagCallback, setSortDirectionCallback, setFilterTagsCallback, children }: { title: string, id: string, count: number | null, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], allFilterTags: string[], sortTag: keyof CardItem, sortDirection: SortDirection, filterTags: string[], setSortTagCallback: Dispatch<SetStateAction<keyof CardItem>>, setSortDirectionCallback: Dispatch<SetStateAction<SortDirection>>, setFilterTagsCallback: Dispatch<SetStateAction<string[]>>, children: React.ReactNode }) {
   const Icon = icon;
 
   return (
@@ -249,6 +291,25 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
               onChange={(e) => setSortTagCallback(e.target.value)}
             >
               {allSortTags.map((item, index) => (
+                <MenuItem
+                  value={item}
+                  key={index}
+                >
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>}
+          </FormControl>
+
+          <FormControl
+            size="small"
+          >
+            {allSortTags.length > 0 && <Select
+              label=""
+              value={sortDirection}
+              onChange={(e) => setSortDirectionCallback(e.target.value)}
+            >
+              {["Descending", "Ascending"].map((item, index) => (
                 <MenuItem
                   value={item}
                   key={index}
@@ -341,38 +402,6 @@ export function Skills() {
   );
 }
 
-export function ItemListWithHeader({ allItems, index, title, id, icon, allSortTags, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, allSortTags: (keyof CardItem)[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
-  const allFilterTags: string[] = Array.from(
-    new Set(allItems.flatMap(group => group.map(item => item.type)))
-  );
-  
-  const [ sortTag, setSortTag ] = useState(allSortTags[0]);
-  const [ filterTags, setFilterTags ] = useState(allFilterTags);
-
-  return (
-    <Section
-      title={title}
-      id={id}
-      count={allItems[index].length}
-      icon={icon}
-      allSortTags={allSortTags}
-      allFilterTags={allFilterTags}
-      sortTag={sortTag}
-      filterTags={filterTags}
-      setSortTagCallback={setSortTag}
-      setFilterTagsCallback={setFilterTags}
-    >
-      <ItemList
-        items={allItems[index]}
-        sortTag={sortTag}
-        filterTags={filterTags}
-        setIsOpenCallback={setIsOpenCallback}
-        setItemCallback={setItemCallback}
-      />
-    </Section>
-  );
-}
-
 export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<SetStateAction<boolean>> }) {
   const [ name, setYourName ] = useState("");
   const [ senderEmail, setSenderEmail ] = useState("");
@@ -455,10 +484,10 @@ export function ContactMe({ setIsOpenCallback }: { setIsOpenCallback: Dispatch<S
   )
 }
 
-export function ItemList({ items, sortTag, filterTags, setIsOpenCallback, setItemCallback }: { items: CardItem[], sortTag: keyof CardItem, filterTags: string[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
+export function ItemList({ items, sortTag, sortDirection, filterTags, setIsOpenCallback, setItemCallback }: { items: CardItem[], sortTag: keyof CardItem, sortDirection: SortDirection, filterTags: string[], setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
   const sortedAndFilteredItems = items
     .filter(item => filterTags.includes(item.type))
-    .sort((a, b) => (a[sortTag] ?? "").toString().localeCompare((b[sortTag] ?? "").toString()));
+    .sort((a, b) => (a[sortTag] ?? "").toString().localeCompare((b[sortTag] ?? "").toString()) * sortDirection);
 
   return (
     <Stack
