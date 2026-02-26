@@ -309,7 +309,7 @@ export function Section({ title, id, count, icon, allSortTags, allFilterTags, so
               value={sortDirection}
               onChange={(e) => setSortDirectionCallback(e.target.value)}
             >
-              {["Descending", "Ascending"].map((item, index) => (
+              {Object.values(SortDirection).map((item, index) => (
                 <MenuItem
                   value={item}
                   key={index}
