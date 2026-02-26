@@ -203,7 +203,7 @@ export function Sidebar() {
 }
 
 export function ItemListWithHeader({ allItems, index, title, id, icon, setIsOpenCallback, setItemCallback }: { allItems: CardItem[][], index: number, title: string, id: string, icon: SvgIconComponent, setIsOpenCallback: Dispatch<SetStateAction<boolean>>, setItemCallback: Dispatch<SetStateAction<CardItem>> }) {
-  const allSortTags = Object.keys(allItems[index]) as (keyof CardItem)[];
+  const allSortTags = Object.keys(allItems[index][0]) as (keyof CardItem)[];
   const allFilterTags = [ ... new Set(allItems[index].map(item => item.type)) ];
   
   const [ sortTag, setSortTag ] = useState(allSortTags[0]);
@@ -313,7 +313,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
           label="Sort By"
           value={sortTag}
           onChange={(e) => setSortTagCallback(e.target.value)}
-          sx={{ width: "200px" }}
+          sx={{ width: "100px" }}
         >
           {allSortTags.map((item, index) => (
             <MenuItem
@@ -330,10 +330,9 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
         size="small"
       >
         {allSortTags.length > 0 && <Select
-          label=""
           value={SortDirection[sortDirection]}
           onChange={(e) => setSortDirectionCallback(SortDirection[e.target.value as keyof typeof SortDirection])}
-          sx={{ width: "200px" }}
+          sx={{ width: "100px" }}
         >
           {Object.values(SortDirection).filter(value => typeof value === "string").map((item, index) => (
             <MenuItem
@@ -370,7 +369,7 @@ export function SortAndFilter({ allSortTags, allFilterTags, sortTag, sortDirecti
 
             setFilterTagsCallback(typeof value === 'string' ? value.split(',') : value);
           }}
-          sx={{ width: "200px" }}
+          sx={{ width: "100px" }}
         >
           {allFilterTags.map((item, index) => {
             const selected = filterTags.includes(item);
